@@ -6,14 +6,10 @@ namespace PayLess
 	{
 		public PayLessModule()
 		{
-			Post["payless/cardregistration"] = parameters => Response.AsJson(new CardDetails {Type = "Maestro"},
-					                                                                  HttpStatusCode.Created);
-					                               
-		}
-	}
+			Post["payless/cardregistration"] = parameters => Response.AsJson
+				                                                 (Card.Register(CardDetails.From(Request)),
+				                                                  HttpStatusCode.Created);
 
-	public class CardDetails
-	{
-		public string Type { get; set; }
+		}
 	}
 }
