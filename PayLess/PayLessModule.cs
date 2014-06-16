@@ -1,4 +1,5 @@
 ﻿using Nancy;
+using Nancy.ModelBinding;
 
 namespace PayLess
 {
@@ -6,9 +7,13 @@ namespace PayLess
 	{
 		public PayLessModule()
 		{
-			Post["payless/cardregistration"] = parameters => Response.AsJson
-				                                                 (Card.Register(CardDetails.From(Request)),
-				                                                  HttpStatusCode.Created);
+			Post["payless/cardregistration"] = parameters =>
+				                                   {
+					                                   var cardDetails = this.Bind<CardDetails>();
+					                                   return Response.AsJson
+						                                   (Card.Register(cardDetails),
+						                                    HttpStatusCode.Created);
+				                                   };
 
 		}
 	}
