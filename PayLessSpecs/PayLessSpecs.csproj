@@ -68,7 +68,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CardRegistration.cs" />
+    <Compile Include="CardSpec.cs" />
     <Compile Include="ModuleSpec.cs" />
+    <Compile Include="CardNumberObscurerSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -5,11 +5,16 @@
 		string Obscure(string cardNumber);
 	}
 
-	class ObscureCardNumber : IObscureCardNumber
+	public class CardNumberObscurer : IObscureCardNumber
 	{
 		public string Obscure(string cardNumber)
 		{
-			return string.Empty;
+			if ((cardNumber == null) || (cardNumber.Length != 16))
+				throw new InvalidCardDetails("Card Number not valid");
+			var cardDigits = cardNumber.ToCharArray();
+			for (var i = 0; i < 12; i++)
+				cardDigits[i] = '*';
+			return new string(cardDigits);
 		}
 	}
 }

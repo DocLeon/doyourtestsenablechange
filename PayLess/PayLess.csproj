@@ -48,6 +48,9 @@
     <Reference Include="Nancy.Hosting.Aspnet">
       <HintPath>..\packages\Nancy.Hosting.Aspnet.0.23.0\lib\net40\Nancy.Hosting.Aspnet.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -70,6 +73,7 @@
   <ItemGroup>
     <Compile Include="Card.cs" />
     <Compile Include="CardDetails.cs" />
+    <Compile Include="InvalidDetailsError.cs" />
     <Compile Include="IObscureCardNumber.cs" />
     <Compile Include="PayLessModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

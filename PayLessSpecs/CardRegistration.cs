@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
+﻿using System.Net;
 using NUnit.Framework;
 using RestSharp;
 
@@ -28,9 +24,9 @@ namespace PayLessSpecs
 			Assert.That(response.ErrorException, Is.Null,"Request received with no problems");
 			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Created),"Registration created");
 			Assert.That(response.Content,Contains.Substring(@"""type"":""Maestro"""),"Card Type");
-			Assert.That(response.Content,Contains.Substring(@"""number"":""***********5454"""),"Card number");
-			Assert.That(response.Content,Contains.Substring(@"""exp-date"":""01/20"""), "Expiry Date");
-			Assert.That(response.Content,Contains.Substring(@"""card-holder-name"":""CARDHOLDERNMAME"""));
+			Assert.That(response.Content,Contains.Substring(@"""number"":""************5454"""),"Card number");
+			Assert.That(response.Content,Contains.Substring(@"""expiryDate"":""01/20"""), "Expiry Date");
+			Assert.That(response.Content,Contains.Substring(@"""cardHolderName"":""CARDHOLDERNAME"""));
 		}
 	}
 }

@@ -7,7 +7,7 @@
 		public string Number { get; set; }
 
 		public string CardHolderName { get; set; }		
-
+		
 		public string ExpiryDate { get; set; }		
 	}
 }
