@@ -6,7 +6,8 @@
 		{
 			return new RegisteredCard
 				       {
-					       Type = details.CardType
+					       Type = details.CardType,
+						   Number = details.CardNumber
 				       };
 		}
 	}

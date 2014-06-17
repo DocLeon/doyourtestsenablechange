@@ -18,8 +18,7 @@ namespace PayLessSpecs
 			var request = new RestRequest("cardregistration/",Method.POST);
 			request.AddParameter("cardtype", "Maestro");
 			request.AddParameter("cardnumber", "5454545454545454");
-			request.AddParameter("cardholdername", "CARDHOLDERNAME");
-			request.AddParameter("postcode", "A12 3BC");
+			request.AddParameter("cardholdername", "CARDHOLDERNAME");			
 			request.AddParameter("startdate", "01/14");
 			request.AddParameter("expirydate", "01/20");
 			request.AddParameter("CVV", "123");
