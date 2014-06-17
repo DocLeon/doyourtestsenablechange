@@ -22,7 +22,8 @@ namespace PayLessSpecs
 			_cardNumberObscurer = Mock.Of<IObscureCardNumber>(o => o.Obscure("CARD_NUMBER") == "OBSCURED_CARD_NUMBER");
 
 			_browser = new Browser(with => with.Module<PayLessModule>()
-			                                   .Dependency(_cardNumberObscurer));
+			                                   .Dependency(_cardNumberObscurer)
+											   .Dependency(new Card(Mock.Of<IStoreCards>())));
 			_response = _browser.Post("payless/cardregistration",
 											with =>
 											{
@@ -92,7 +93,8 @@ namespace PayLessSpecs
 			Mock.Get(_cardNumberObscurer).Setup(o => o.Obscure("CARD_NUMBER")).Throws(new InvalidCardDetails("Error Message"));
 
 			_browser = new Browser(with => with.Module<PayLessModule>()
-			                                   .Dependency(_cardNumberObscurer));
+			                                   .Dependency(_cardNumberObscurer)
+											   .Dependency(new Card(Mock.Of<IStoreCards>())));
 			_response = _browser.Post("payless/cardregistration",
 			                          with =>
 				                          {

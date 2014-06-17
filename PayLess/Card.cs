@@ -1,13 +1,20 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace PayLess
 {
-	public class Card
+	public class Card : IRegisterCards
 	{
-		public static RegisteredCard Register(CardDetails details)
+		private readonly IStoreCards _cardStore;
+
+		public Card(IStoreCards cardStore)
+		{
+			_cardStore = cardStore;			
+		}
+
+		public RegisteredCard Register(CardDetails details)
 		{
 			Validate(details);
+			_cardStore.Save(details);
 			return new RegisteredCard
 				       {
 					       Type = details.CardType,
@@ -21,12 +28,6 @@ namespace PayLess
 		{
 			if ((details.ExpiryDate == null) || (!Regex.Match(details.ExpiryDate,@"^(0[1-9]|1[0-2])\/([0-9]{2})$").Success))
 				throw new InvalidCardDetails("Expiry Date not valid");
-		}
-	}
-	public class InvalidCardDetails : Exception
-	{
-		public InvalidCardDetails(string message) : base(message)
-		{			
 		}
 	}
 }
