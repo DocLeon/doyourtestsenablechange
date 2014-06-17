@@ -29,6 +29,10 @@ namespace PayLessSpecs
 												with.FormValue("cardtype", "CARD-TYPE");
 												with.FormValue("cardnumber", "CARD_NUMBER");												
 												with.FormValue("cardholdername","CARDHOLDERNAME");
+												with.FormValue("startdate","01/14");
+												with.FormValue("expirydate", "01/20");
+												with.FormValue("CVV","123");
+												with.FormValue("issuenumber","1");
 											}
 											);
 		}
@@ -38,7 +42,12 @@ namespace PayLessSpecs
 		{
 			var expectedRegisteredCard = new
 				                             {
-												Type = "CARD-TYPE"
+												Type = "CARD-TYPE",
+												CardHolderName = "CARDHOLDERNAME",
+												StartDate = "01/14",
+												ExpiryDate = "01/20",
+												CVV = "123",
+												IssueNumber = "1"
 				                             }.ToExpectedObject();
 			var actualCardRegistered = _response.Body.DeserializeJson<RegisteredCard>();
 
@@ -57,12 +66,24 @@ namespace PayLessSpecs
 		{
 			Assert.That(_response.Body.DeserializeJson<RegisteredCard>().Number, Is.EqualTo("OBSCURED_CARD_NUMBER"), "ResponseBody:{0}", _response.Body.AsString());		
 		}
+
+		public class RegisteredCard
+		{
+			public string Type { get; set; }
+
+			public string Number { get; set; }
+
+			public string CardHolderName { get; set; }
+
+			public string StartDate { get; set; }
+
+			public string ExpiryDate { get; set; }
+
+			public string CVV { get; set; }
+
+			public string IssueNumber { get; set; }
+		}
 	}
 
-	public class RegisteredCard
-	{
-		public string Type { get; set; }
-
-		public string Number { get; set; }
-	}
+	
 }

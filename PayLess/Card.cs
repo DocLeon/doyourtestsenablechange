@@ -7,7 +7,12 @@
 			return new RegisteredCard
 				       {
 					       Type = details.CardType,
-						   Number = details.CardNumber
+						   Number = details.CardNumber,
+						   CardHolderName = details.CardHolderName,
+						   StartDate = details.StartDate,
+						   ExpiryDate = details.ExpiryDate,
+						   CVV = details.CVV,
+						   IssueNumber = details.IssueNumber
 				       };
 		}
 	}
