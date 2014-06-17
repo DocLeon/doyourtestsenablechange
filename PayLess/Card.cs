@@ -8,11 +8,8 @@
 				       {
 					       Type = details.CardType,
 						   Number = details.CardNumber,
-						   CardHolderName = details.CardHolderName,
-						   StartDate = details.StartDate,
+						   CardHolderName = details.CardHolderName,						   
 						   ExpiryDate = details.ExpiryDate,
-						   CVV = details.CVV,
-						   IssueNumber = details.IssueNumber
 				       };
 		}
 	}

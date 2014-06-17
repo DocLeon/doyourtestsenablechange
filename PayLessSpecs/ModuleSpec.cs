@@ -43,11 +43,8 @@ namespace PayLessSpecs
 			var expectedRegisteredCard = new
 				                             {
 												Type = "CARD-TYPE",
-												CardHolderName = "CARDHOLDERNAME",
-												StartDate = "01/14",
+												CardHolderName = "CARDHOLDERNAME",												
 												ExpiryDate = "01/20",
-												CVV = "123",
-												IssueNumber = "1"
 				                             }.ToExpectedObject();
 			var actualCardRegistered = _response.Body.DeserializeJson<RegisteredCard>();
 
@@ -75,13 +72,7 @@ namespace PayLessSpecs
 
 			public string CardHolderName { get; set; }
 
-			public string StartDate { get; set; }
-
 			public string ExpiryDate { get; set; }
-
-			public string CVV { get; set; }
-
-			public string IssueNumber { get; set; }
 		}
 	}
 
