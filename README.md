@@ -1,7 +1,8 @@
 doyourtestsenablechange
 =======================
 
-'''PAYLESS
+PAYLESS
+-------
 Payless will take payments from account holders in the UK and Australia.
 
 UK account numbers have 16 digits and start with 44.
@@ -34,7 +35,8 @@ Payments below the described amount should be marked as 'micro' in the type fiel
 The request will return a plain text response containing the id of the purchase.
 
 
-'''PAYLESS refund
+PAYLESS refund
+--------------
 
 http://...payless/refundpurchase?accountnumber=44234567890&location=UK&purchaseId={GUID}
 
@@ -46,7 +48,8 @@ Response will be a success/failure.
 
 ONLY FULL REFUNDS ARE PERMITTED. requests containing amounts will be REJECTED.
 
-'''PAYMORE
+PAYMORE
+-------
 As above in terms of parameters supplied (and their validation)
 BUT
 type must be ommitted
