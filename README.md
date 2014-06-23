@@ -63,6 +63,29 @@ BODY: {link:/paymore/.../Guid}
 Refund - DELETE this resource.
 
 
+ACTIVITY
+========
+
+Form pairs.
+
+PART ONE
+--------
+Write a system that allows users to input their account number, where they are located, how much they want to pay and what currency they want to pay in.
+The system should validate this input so a successful call to PAYLESS can be made (because even invalid calls to PAYLESS costs us MONEY).
+This is can be a console app, webpage or mobile app.
+
+PART TWO
+--------
+We've discovered customers aren't always delighted with their purchases, so have been asking for refunds.
+Luckily PAYLESS supplies refund functionality. The teams must implement this. (What? They haven't been storing purchaseIds? We'll send those customers a cuddly aardvark as a gesture of goodwill).
+
+PART THREE
+----------
+PAYMORE will do high payments cheaper than PAYLESS. Migrate the system to use PAYMORE. (but only for non-micro payments)
+
+
+
+
 
 
 
