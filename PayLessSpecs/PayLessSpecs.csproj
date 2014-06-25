@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuildPurchasesSpec.cs" />
     <Compile Include="CardSpec.cs" />
     <Compile Include="CardStoreSpec.cs" />
     <Compile Include="ModuleSpec.cs" />

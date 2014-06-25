@@ -5,11 +5,6 @@ using Nancy;
 
 namespace PayLess
 {
-	public interface IBuildPurchases
-	{
-		void From(string purchaseParameters);
-	}
-
 	public class PayLessModule : NancyModule
 	{
 		private IBuildPurchases _purchase;

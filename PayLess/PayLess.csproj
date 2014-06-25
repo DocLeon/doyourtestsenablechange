@@ -80,14 +80,17 @@
     <Compile Include="Card.cs" />
     <Compile Include="CardDetails.cs" />
     <Compile Include="CardStore.cs" />
+    <Compile Include="IBuildPurchases.cs" />
     <Compile Include="InvalidCardDetails.cs" />
     <Compile Include="InvalidDetailsError.cs" />
     <Compile Include="IObscureCardNumber.cs" />
     <Compile Include="IStoreCards.cs" />
+    <Compile Include="IValidatePurchaseCanBeBuilt.cs" />
     <Compile Include="PayLessModule.cs" />
     <Compile Include="PaymentDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Purchase.cs" />
+    <Compile Include="PurchaseBuilder.cs" />
     <Compile Include="RegisteredCard.cs" />
   </ItemGroup>
   <ItemGroup>
