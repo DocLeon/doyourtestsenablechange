@@ -1,7 +1,9 @@
-﻿namespace PayLess
+﻿using System.Collections.Generic;
+
+namespace PayLess
 {
 	public interface IParseQueryStrings
 	{
-		void Parse(string queryString);
+		IDictionary<string, string> Parse(string queryString);
 	}
 }

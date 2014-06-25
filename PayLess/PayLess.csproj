@@ -87,6 +87,7 @@
     <Compile Include="IParseQueryStrings.cs" />
     <Compile Include="IStoreCards.cs" />
     <Compile Include="IValidatePurchaseCanBeBuilt.cs" />
+    <Compile Include="MissingParameterException.cs" />
     <Compile Include="PayLessModule.cs" />
     <Compile Include="PayLessValidation.cs" />
     <Compile Include="PaymentDetails.cs" />

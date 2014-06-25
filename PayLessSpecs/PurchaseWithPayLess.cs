@@ -17,5 +17,15 @@ namespace PayLessSpecs
 			Console.WriteLine("STATUS:{0}",response.StatusCode);
 			Console.WriteLine("BODY:{0}", response.Content);
 		}
+
+		[Test]
+		public void MissingParamterReturnsBadRequestWithDetails()
+		{			
+		}
+
+		[Test]
+		public void IncompatibleParametersReturnsForbiddenWithDetails()
+		{			
+		}
 	}
 }
