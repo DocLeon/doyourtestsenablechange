@@ -84,9 +84,11 @@
     <Compile Include="InvalidCardDetails.cs" />
     <Compile Include="InvalidDetailsError.cs" />
     <Compile Include="IObscureCardNumber.cs" />
+    <Compile Include="IParseQueryStrings.cs" />
     <Compile Include="IStoreCards.cs" />
     <Compile Include="IValidatePurchaseCanBeBuilt.cs" />
     <Compile Include="PayLessModule.cs" />
+    <Compile Include="PayLessValidation.cs" />
     <Compile Include="PaymentDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Purchase.cs" />

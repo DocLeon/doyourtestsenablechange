@@ -74,6 +74,7 @@
     <Compile Include="CardNumberObscurerSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseWithPayLess.cs" />
+    <Compile Include="ValidateCanBuildPurchaseFormParmatersSpec.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
