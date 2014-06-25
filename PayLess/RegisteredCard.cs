@@ -1,7 +1,9 @@
 ﻿namespace PayLess
 {
 	public class RegisteredCard
-	{	
+	{
+		public string Token { get; set; }
+
 		public string Type { get; set; }
 
 		public string Number { get; set; }

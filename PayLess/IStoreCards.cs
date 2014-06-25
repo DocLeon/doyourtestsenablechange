@@ -2,6 +2,6 @@
 {
 	public interface IStoreCards
 	{
-		void Save(CardDetails cardDetails);
+		string Save(CardDetails cardDetails);
 	}
 }

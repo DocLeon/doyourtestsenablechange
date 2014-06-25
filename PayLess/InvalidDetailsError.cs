@@ -23,6 +23,19 @@ namespace PayLess
 									                                       }
 							                            };
 					                     }
+										 if (exception is UnsuccessfulPurchase)
+										 {
+											 return new Response
+											 {
+												 StatusCode = HttpStatusCode.Forbidden,
+												 ContentType = "text/plain",
+												 Contents = (stream) =>
+												 {
+													 var errorMessage = Encoding.UTF8.GetBytes(exception.Message);
+													 stream.Write(errorMessage, 0, errorMessage.Length);
+												 }
+											 };
+										 }
 					                     return HttpStatusCode.InternalServerError;
 				                     };
 		}

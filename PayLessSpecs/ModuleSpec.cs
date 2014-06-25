@@ -1,5 +1,4 @@
 ﻿using System;
-using ExpectedObjects;
 using Moq;
 using NUnit.Framework;
 using Nancy;
@@ -9,111 +8,41 @@ using PayLess;
 namespace PayLessSpecs
 {
 	[TestFixture]
-	public class ModuleSpec
+	public class MakePurchase
 	{
-		private IObscureCardNumber _cardNumberObscurer;
-
-		private Browser _browser;
-		private BrowserResponse _response;
-
-		[SetUp]
-		public void SetUp()
+		public MakePurchase()
 		{
-			_cardNumberObscurer = Mock.Of<IObscureCardNumber>(o => o.Obscure("CARD_NUMBER") == "OBSCURED_CARD_NUMBER");
-
+			_purchaseBuilder = Mock.Of<IBuildPurchases>();
 			_browser = new Browser(with => with.Module<PayLessModule>()
-			                                   .Dependency(_cardNumberObscurer)
-											   .Dependency(new Card(Mock.Of<IStoreCards>())));
-			_response = _browser.Post("payless/cardregistration",
-											with =>
-											{
-												with.HttpRequest();
-												with.FormValue("cardtype", "CARD-TYPE");
-												with.FormValue("cardnumber", "CARD_NUMBER");												
-												with.FormValue("cardholdername","CARDHOLDERNAME");
-												with.FormValue("startdate","01/14");
-												with.FormValue("expirydate", "01/20");
-												with.FormValue("CVV","123");
-												with.FormValue("issuenumber","1");
-											}
-											);
+				.Dependency(_purchaseBuilder));
 		}
+		private Browser _browser;
+		private IBuildPurchases _purchaseBuilder;
 
 		[Test]
-		public void Should_return_registered_card()
-		{
-			var expectedRegisteredCard = new
-				                             {
-												Type = "CARD-TYPE",
-												CardHolderName = "CARDHOLDERNAME",												
-												ExpiryDate = "01/20",
-				                             }.ToExpectedObject();
-			var actualCardRegistered = _response.Body.DeserializeJson<RegisteredCard>();
-
-			Console.WriteLine(_response.Body.AsString());
-			expectedRegisteredCard.ShouldMatch(actualCardRegistered);			
-		}
-
-		[Test]
-		public void Should_obscure_first_twelve_digits_of_card()
+		public void should_return_ok_if_all_params_supplied()
 		{						
-			Mock.Get(_cardNumberObscurer).Verify(o => o.Obscure("CARD_NUMBER"));
+			var response = _browser.Post(string.Format("/makepurchase?accountnumber=1234&"),
+				with => with.HttpRequest());
+			Console.WriteLine(response.Body.AsString());    
+			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
 		}
 
 		[Test]
-		public void Should_return_obscured_card_number()
+		public void should_return_bad_request_if_no_query_string_passed()
 		{
-			Assert.That(_response.Body.DeserializeJson<RegisteredCard>().Number, Is.EqualTo("OBSCURED_CARD_NUMBER"), "ResponseBody:{0}", _response.Body.AsString());		
-		}
-
-
-		public class RegisteredCard
-		{
-			public string Type { get; set; }
-
-			public string Number { get; set; }
-
-			public string CardHolderName { get; set; }
-
-			public string ExpiryDate { get; set; }
-		}
-	}
-
-	[TestFixture]
-	public class InvalidInputSpec
-	{
-		private IObscureCardNumber _cardNumberObscurer;
-		private Browser _browser;
-		private BrowserResponse _response;
-
-		[SetUp]
-		public void SetUp()
-		{
-			_cardNumberObscurer = Mock.Of<IObscureCardNumber>();
-			Mock.Get(_cardNumberObscurer).Setup(o => o.Obscure("CARD_NUMBER")).Throws(new InvalidCardDetails("Error Message"));
-
-			_browser = new Browser(with => with.Module<PayLessModule>()
-			                                   .Dependency(_cardNumberObscurer)
-											   .Dependency(new Card(Mock.Of<IStoreCards>())));
-			_response = _browser.Post("payless/cardregistration",
-			                          with =>
-				                          {
-					                          with.HttpRequest();
-					                          with.FormValue("cardtype", "CARD-TYPE");
-					                          with.FormValue("cardnumber", "CARD_NUMBER");
-					                          with.FormValue("cardholdername", "CARDHOLDERNAME");
-					                          with.FormValue("startdate", "01/14");
-					                          with.FormValue("expirydate", "01/20");
-					                          with.FormValue("CVV", "123");
-					                          with.FormValue("issuenumber", "1");
-				                          }
-				);
+			var response = _browser.Post("/makepurchase");
+			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
 		}
 
 		[Test]
-		public void should_return_invalid_request_status()
+		public void should_build_purchase_from_parameters()
 		{
-			Assert.That(_response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+			const string purchaseParameters = "PURCHASE_PARAMETERS";
+			_browser.Post(string.Format("/makepurchase?{0}", purchaseParameters));
+			Mock.Get(_purchaseBuilder).Verify(b=>b.From(purchaseParameters));
 		}
 	}
+
+	
 }

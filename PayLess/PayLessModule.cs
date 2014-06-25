@@ -1,27 +1,70 @@
-﻿using Nancy;
-using Nancy.ModelBinding;
+﻿using System;
+using System.Configuration;
+using System.Data.SqlClient;
+using Nancy;
 
 namespace PayLess
 {
+	public interface IBuildPurchases
+	{
+		void From(string purchaseParameters);
+	}
+
 	public class PayLessModule : NancyModule
 	{
-		private readonly IObscureCardNumber _cardNumberObscurer;
-		private IRegisterCards _card;
+		private IBuildPurchases _purchase;
 
-		public PayLessModule(IObscureCardNumber cardNumberObscurer, IRegisterCards card)
+		public PayLessModule(IBuildPurchases purchase)
 		{
-			_cardNumberObscurer = cardNumberObscurer;
-			_card = card;
-			Post["payless/cardregistration"] = parameters =>
-				                                   {
-					                                   var cardDetails = this.Bind<CardDetails>();
-													   cardDetails.CardNumber = _cardNumberObscurer.Obscure(cardDetails.CardNumber);
-					                                   return Response.AsJson
-						                                   (_card.Register(cardDetails),
-						                                    HttpStatusCode.Created);
-				                                   };
+			_purchase = purchase;
+			Post["/makepurchase"] = _ => HttpStatusCode.BadRequest;
+
+			Post["/makepurchase?{purchaseParameters}"] = parameters =>
+				                                     {
+														 _purchase.From(parameters.purchaseParameters);
+					                                     return "okay";
+				                                     };
+
+			Get["/status"] = _ =>
+				                 {
+					                 
+										 using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["PayLess"].ConnectionString))
+										 {
+											 try
+											 {
+												 connection.Open();
+											 }
+											 catch (Exception ex)
+											 {
+												 return string.Format("Something went wrong: {0}",ex.Message);
+
+											 }
+										 }
+
+
+					                 return "I'm okay, thanks for asking.";
+				                 };
 		}
 	}
+
+	public class PurchaseStore
+	{		
+		public string Save(IPurchaseMade purchase)
+		{
+			string purchaseToken = Guid.NewGuid().ToString();
+			using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["PayLess"].ConnectionString))
+			{
+				using (var command = new SqlCommand(string.Format("INSERT INTO Purchase (cardtoken,purchasetoken,amount) VALUES ('{0}','{1}','{2}'",purchase.CardToken,purchaseToken,purchase.Amount), connection))
+				{
+					connection.Open();
+					command.ExecuteNonQuery();
+				}
+			}				
+			return purchaseToken;			
+		}
+		
+	}
+
 
 	public interface IRegisterCards
 	{

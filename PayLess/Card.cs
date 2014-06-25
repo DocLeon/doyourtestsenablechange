@@ -14,9 +14,10 @@ namespace PayLess
 		public RegisteredCard Register(CardDetails details)
 		{
 			Validate(details);
-			_cardStore.Save(details);
+			var token = _cardStore.Save(details);
 			return new RegisteredCard
 				       {
+						   Token = token,
 					       Type = details.CardType,
 						   Number = details.CardNumber,
 						   CardHolderName = details.CardHolderName,						   
