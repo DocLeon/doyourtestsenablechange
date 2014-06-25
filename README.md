@@ -5,8 +5,9 @@ PAYLESS
 -------
 Payless will take payments from account holders in the UK and Australia.
 
-UK account numbers have 16 digits and start with 44.
-AU account numbers have 10 digits and end with 19.
+All Payless account numbers have ten digits.
+UK account numbers are prepended with 44.
+AU account numbers are appended with 19.
 
 A payment must be marked as micro is it is below a certain monetry value.
 In the UK this is amounts less than £5.
