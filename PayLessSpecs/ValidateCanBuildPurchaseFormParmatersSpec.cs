@@ -20,19 +20,7 @@ namespace PayLessSpecs
 					                                     {"amount", "1.99"},
 					                                     {"currency", "GBP"}
 				                                     };
-		}
-
-		[Test]
-		public void shoud_extract_fields()
-		{			
-			const string queryString = "QUERYSTRING";
-			var fieldParser = Mock.Of<IParseQueryStrings>(
-				p => p.Parse(It.IsAny<string>()) == _fields);
-			var validate = new PayLessValidation(fieldParser);
-			validate.CanBuildPurchaseFrom(queryString);			
-			Mock.Get(fieldParser).Verify(p=>p.Parse(queryString));
-		}
-
+		}		
 
 		[TestCase("accountnumber")]
 		[TestCase("location")]
@@ -44,7 +32,7 @@ namespace PayLessSpecs
 			var fieldParser = Mock.Of<IParseQueryStrings>(
 				p => p.Parse(It.IsAny<string>()) == _fields);
 			var validate = new PayLessValidation(fieldParser);
-			var exception = Assert.Throws<missingParameterException>(() => validate.CanBuildPurchaseFrom("ANYTHING"));
+			var exception = Assert.Throws<missingParameterException>(() => validate.CanBuildPurchaseFrom("ANYTHING", _fields));
 			Assert.That(exception.Code,Is.EqualTo(missingParameter.Length + 3000));
 			Assert.That(exception.Parameter,Is.EqualTo(missingParameter));
 		}

@@ -44,16 +44,16 @@ namespace PayLess
 
 	public class PurchaseStore
 	{		
-		public string Save(IPurchaseMade purchase)
+		public string Save(Purchase purchase)
 		{
 			string purchaseToken = Guid.NewGuid().ToString();
 			using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["PayLess"].ConnectionString))
 			{
-				using (var command = new SqlCommand(string.Format("INSERT INTO Purchase (cardtoken,purchasetoken,amount) VALUES ('{0}','{1}','{2}'",purchase.CardToken,purchaseToken,purchase.Amount), connection))
+				/*using (var command = new SqlCommand(string.Format("INSERT INTO Purchase (cardtoken,purchasetoken,amount) VALUES ('{0}','{1}','{2}'",purchase.CardToken,purchaseToken,purchase.Amount), connection))
 				{
 					connection.Open();
 					command.ExecuteNonQuery();
-				}
+				}*/
 			}				
 			return purchaseToken;			
 		}

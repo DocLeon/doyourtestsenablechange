@@ -2,6 +2,6 @@
 {
 	public interface IBuildPurchases
 	{
-		void From(string purchaseParameters);
+		Purchase From(string purchaseParameters);
 	}
 }

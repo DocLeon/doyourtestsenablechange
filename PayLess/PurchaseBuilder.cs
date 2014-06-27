@@ -3,15 +3,25 @@
 	public class PurchaseBuilder: IBuildPurchases
 	{
 		private readonly IValidatePurchaseCanBeBuilt _validate;
+		private IParseQueryStrings _queryString;
 
-		public PurchaseBuilder(IValidatePurchaseCanBeBuilt validate)
+		public PurchaseBuilder(IValidatePurchaseCanBeBuilt validate, IParseQueryStrings queryString)
 		{
 			_validate = validate;
+			_queryString = queryString;
 		}
 
-		public void From(string purchaseParameters)
+		public Purchase From(string purchaseParameters)
 		{
-			_validate.CanBuildPurchaseFrom(purchaseParameters);
+			var purchaseFields = _queryString.Parse(purchaseParameters);
+			_validate.CanBuildPurchaseFrom(purchaseParameters, purchaseFields);
+			return new Purchase
+				       {
+					       Location = purchaseFields["location"],
+						   AccountNumber = purchaseFields["accountnumber"],
+						   Amount = purchaseFields["amount"],
+						   Currency = purchaseFields["currency"]
+				       };
 		}
 	}
 }

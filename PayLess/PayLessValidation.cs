@@ -4,7 +4,7 @@ namespace PayLess
 {
 	public class PayLessValidation: IValidatePurchaseCanBeBuilt
 	{
-		private IParseQueryStrings _fields;
+		private IParseQueryStrings _queryString;
 
 		private readonly IDictionary<string,string> _compulsoryFields = new Dictionary<string, string>
 				                                     {
@@ -14,21 +14,30 @@ namespace PayLess
 					                                     {"currency", "GBP"}
 				                                     };
 
-		public PayLessValidation(IParseQueryStrings fields)
+		public PayLessValidation(IParseQueryStrings queryString)
 		{
-			_fields = fields;
+			_queryString = queryString;
 		}
 
-		public void CanBuildPurchaseFrom(string purchaseParams)
+		public void CanBuildPurchaseFrom(string purchaseParams, IDictionary<string, string> purchaseFields)
 		{
-			var fields = _fields.Parse(purchaseParams);
+			var fields = purchaseFields;
 			foreach (var field in _compulsoryFields.Keys)
+			{
 				if (!fields.ContainsKey(field))
 					throw new missingParameterException
+					{
+						Code = 3000 + field.Length,
+						Parameter = field
+					};
+				if (string.IsNullOrEmpty(fields[field]))
+					throw new MissingValueException
 						      {
-							      Code = 3000 + field.Length,
-								  Parameter = field
+							      Parameter = field,
+							      Code = 4000 + field.Length
 						      };
+			}
+				
 		}
 	}
 }
