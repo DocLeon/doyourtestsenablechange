@@ -15,13 +15,11 @@
 		{
 			var purchaseFields = _queryString.Parse(purchaseParameters);
 			_validate.CanBuildPurchaseFrom(purchaseParameters, purchaseFields);
-			return new Purchase
-				       {
-					       Location = purchaseFields["location"],
-						   AccountNumber = purchaseFields["accountnumber"],
-						   Amount = purchaseFields["amount"],
-						   Currency = purchaseFields["currency"]
-				       };
+			return new Purchase(
+				purchaseFields["accountnumber"], 
+				purchaseFields["location"], 
+				purchaseFields["amount"], 
+				purchaseFields["currency"]);
 		}
 	}
 }

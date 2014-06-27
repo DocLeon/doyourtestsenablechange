@@ -11,9 +11,9 @@ namespace PayLessSpecs
 	{
 		private IDictionary<string, string> _parsedQueryString = new Dictionary<string, string>
 			                                         {
-				                                         {"accountnumber","1234"},
-				                                         {"location","UK"},
-				                                         {"amount","1.99"},
+				                                         {"accountnumber","441234567890"},
+				                                         {"location","GB"},
+				                                         {"amount","12.99"},
 				                                         {"currency","GBP"}
 			                                         };
 
