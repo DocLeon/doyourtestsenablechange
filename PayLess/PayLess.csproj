@@ -83,6 +83,7 @@
     <Compile Include="ErrorHandling.cs" />
     <Compile Include="IBuildPurchases.cs" />
     <Compile Include="InvalidCardDetails.cs" />
+    <Compile Include="InvalidPurchaseMade.cs" />
     <Compile Include="IObscureCardNumber.cs" />
     <Compile Include="IParseQueryStrings.cs" />
     <Compile Include="IStoreCards.cs" />

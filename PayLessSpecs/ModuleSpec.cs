@@ -51,5 +51,18 @@ namespace PayLessSpecs
 			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
 			Assert.That(response.Body.AsString(), Is.EqualTo("ERROR:3001 PARAM not supplied"));
 		}
+
+		[Test]
+		public void should_forbid_the_payment_if_invalid()
+		{
+			Mock.Get(_purchaseBuilder).Setup(p => p.From(It.IsAny<string>())).Throws(new InvalidPurchaseMade
+				                                                                         {
+																							 ErrorCode = 928,
+																							 Reason = "Reason"
+				                                                                         });
+			var response = _browser.Post("/makepurchase");
+			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
+			Assert.That(response.Body.AsString(), Is.EqualTo("ERROR:928 Reason"));
+		}
 	}
 }
