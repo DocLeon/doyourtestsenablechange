@@ -12,14 +12,19 @@ namespace PayLess
 		public PayLessModule(IBuildPurchases purchase)
 		{
 			_purchase = purchase;
-			Post["/makepurchase"] = _ => HttpStatusCode.BadRequest;
+			Post["/makepurchase"] = _  =>
+				                        {
+											_purchase.From(Request.Url.Query);
+											return HttpStatusCode.OK;
+										
+										};
 
-			Post["/makepurchase?{purchaseParameters}"] = parameters =>
-				                                     {
+			/*Post["/makepurchase?{purchaseParameters}"] = parameters => "hello";
+				                                     /*{
 														 _purchase.From(parameters.purchaseParameters);
-					                                     return "okay";
-				                                     };
-
+					                                     return HttpStatusCode.OK;
+				                                     };#1#
+*/
 			Get["/status"] = _ =>
 				                 {
 					                 
@@ -37,7 +42,7 @@ namespace PayLess
 										 }
 
 
-					                 return "I'm okay, thanks for asking.";
+					                 return "I thinkI'm okay, thanks for asking.";
 				                 };
 		}
 	}
