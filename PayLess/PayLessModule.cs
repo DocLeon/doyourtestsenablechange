@@ -19,12 +19,7 @@ namespace PayLess
 										
 										};
 
-			/*Post["/makepurchase?{purchaseParameters}"] = parameters => "hello";
-				                                     /*{
-														 _purchase.From(parameters.purchaseParameters);
-					                                     return HttpStatusCode.OK;
-				                                     };#1#
-*/
+
 			Get["/status"] = _ =>
 				                 {
 					                 
@@ -42,7 +37,7 @@ namespace PayLess
 										 }
 
 
-					                 return "I thinkI'm okay, thanks for asking.";
+					                 return "I'm okay, thanks for asking.";
 				                 };
 		}
 	}

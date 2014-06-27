@@ -24,7 +24,11 @@ namespace PayLess
 			var fields = _fields.Parse(purchaseParams);
 			foreach (var field in _compulsoryFields.Keys)
 				if (!fields.ContainsKey(field))
-					throw new MissingParameterException();
+					throw new missingParameterException
+						      {
+							      Code = 3000 + field.Length,
+								  Parameter = field
+						      };
 		}
 	}
 }

@@ -4,13 +4,13 @@ using Nancy.Bootstrapper;
 
 namespace PayLess
 {
-	public class InvalidDetailsError: IApplicationStartup
+	public class ErrorHandling: IApplicationStartup
 	{
 		public void Initialize(IPipelines pipelines)
 		{
 			pipelines.OnError += (context, exception) =>
 				                     {
-					                     if (exception is InvalidCardDetails)
+					                     if (exception is missingParameterException)
 					                     {
 						                     return new Response
 							                            {
@@ -18,26 +18,14 @@ namespace PayLess
 								                            ContentType = "text/plain",
 								                            Contents = (stream) =>
 									                                       {
-										                                       var errorMessage = Encoding.UTF8.GetBytes(exception.Message);
+										                                       var errorMessage =
+											                                       Encoding.UTF8.GetBytes(string.Format("ERROR:{0} {1} missing",(exception as missingParameterException).Code,(exception as missingParameterException).Parameter));
 										                                       stream.Write(errorMessage, 0, errorMessage.Length);
 									                                       }
 							                            };
 					                     }
-										 if (exception is UnsuccessfulPurchase)
-										 {
-											 return new Response
-											 {
-												 StatusCode = HttpStatusCode.Forbidden,
-												 ContentType = "text/plain",
-												 Contents = (stream) =>
-												 {
-													 var errorMessage = Encoding.UTF8.GetBytes(exception.Message);
-													 stream.Write(errorMessage, 0, errorMessage.Length);
-												 }
-											 };
-										 }
 					                     return HttpStatusCode.InternalServerError;
-				                     };
+				                     };			
 		}
 	}
 }

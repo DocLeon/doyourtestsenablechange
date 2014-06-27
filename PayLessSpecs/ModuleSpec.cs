@@ -26,6 +26,19 @@ namespace PayLessSpecs
 			              with => with.Query("PURCHASE_PARAMETER", "VALUE")); 
 			Mock.Get(_purchaseBuilder).Verify(b=>b.From("?PURCHASE_PARAMETER=VALUE"));
 		}
+
+		[Test]
+		public void shoudld_indicate_bad_request_if_any_parameters_missing()
+		{
+			Mock.Get(_purchaseBuilder).Setup(p => p.From(It.IsAny<string>())).Throws(new missingParameterException()
+				                                                                         {
+					                                                                         Parameter = "PARAM",
+																							 Code = 3001
+				                                                                         });
+			var response = _browser.Post("/makepurchase");
+			Assert.That(response.StatusCode,Is.EqualTo(HttpStatusCode.BadRequest));
+			Assert.That(response.Body.AsString(),Is.EqualTo("ERROR:3001 PARAM missing"));
+		}
 	}
 
 	

@@ -21,7 +21,7 @@ namespace PayLessSpecs
 		}
 
 		[Test]
-		public void MissingParamterReturnsBadRequestWithDetails()
+		public void missingParamterReturnsBadRequestWithDetails()
 		{			
 		}
 

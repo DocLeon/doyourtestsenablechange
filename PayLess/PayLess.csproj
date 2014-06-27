@@ -80,9 +80,9 @@
     <Compile Include="Card.cs" />
     <Compile Include="CardDetails.cs" />
     <Compile Include="CardStore.cs" />
+    <Compile Include="ErrorHandling.cs" />
     <Compile Include="IBuildPurchases.cs" />
     <Compile Include="InvalidCardDetails.cs" />
-    <Compile Include="InvalidDetailsError.cs" />
     <Compile Include="IObscureCardNumber.cs" />
     <Compile Include="IParseQueryStrings.cs" />
     <Compile Include="IStoreCards.cs" />

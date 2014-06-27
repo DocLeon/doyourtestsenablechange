@@ -44,7 +44,10 @@ namespace PayLessSpecs
 			var fieldParser = Mock.Of<IParseQueryStrings>(
 				p => p.Parse(It.IsAny<string>()) == _fields);
 			var validate = new PayLessValidation(fieldParser);
-			Assert.Throws<MissingParameterException>(() => validate.CanBuildPurchaseFrom("ANYTHING"));
+			var exception = Assert.Throws<missingParameterException>(() => validate.CanBuildPurchaseFrom("ANYTHING"));
+			Assert.That(exception.Code,Is.EqualTo(missingParameter.Length + 3000));
+			Assert.That(exception.Parameter,Is.EqualTo(missingParameter));
+
 		}
 	}
 }

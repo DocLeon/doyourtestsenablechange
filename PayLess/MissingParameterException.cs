@@ -2,7 +2,10 @@
 
 namespace PayLess
 {
-	public class MissingParameterException: Exception
+	public class missingParameterException: Exception
 	{
+		public string Parameter { get; set; }
+
+		public int Code { get; set; }
 	}
 }
