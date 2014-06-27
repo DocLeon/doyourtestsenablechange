@@ -47,7 +47,6 @@ namespace PayLessSpecs
 			var exception = Assert.Throws<missingParameterException>(() => validate.CanBuildPurchaseFrom("ANYTHING"));
 			Assert.That(exception.Code,Is.EqualTo(missingParameter.Length + 3000));
 			Assert.That(exception.Parameter,Is.EqualTo(missingParameter));
-
 		}
 	}
 }

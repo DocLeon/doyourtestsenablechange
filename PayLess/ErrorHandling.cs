@@ -24,6 +24,18 @@ namespace PayLess
 									                                       }
 							                            };
 					                     }
+										 if (exception is MissingValueException)
+											 return new Response
+											 {
+												 StatusCode = HttpStatusCode.BadRequest,
+												 ContentType = "text/plain",
+												 Contents = (stream) =>
+												 {
+													 var errorMessage =
+														 Encoding.UTF8.GetBytes(string.Format("ERROR:{0} {1} not supplied", (exception as MissingValueException).Code, (exception as MissingValueException).Parameter));
+													 stream.Write(errorMessage, 0, errorMessage.Length);
+												 }
+											 };
 					                     return HttpStatusCode.InternalServerError;
 				                     };			
 		}

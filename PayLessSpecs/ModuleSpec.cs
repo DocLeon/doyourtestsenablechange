@@ -1,5 +1,4 @@
-﻿using System;
-using Moq;
+﻿using Moq;
 using NUnit.Framework;
 using Nancy;
 using Nancy.Testing;
@@ -39,7 +38,18 @@ namespace PayLessSpecs
 			Assert.That(response.StatusCode,Is.EqualTo(HttpStatusCode.BadRequest));
 			Assert.That(response.Body.AsString(),Is.EqualTo("ERROR:3001 PARAM missing"));
 		}
-	}
 
-	
+		[Test]
+		public void should_indicate_bad_request_if_any_parameter_value_is_missing()
+		{
+			Mock.Get(_purchaseBuilder).Setup(p => p.From(It.IsAny<string>())).Throws(new MissingValueException()
+			{
+				Parameter = "PARAM",
+				Code = 3001
+			});
+			var response = _browser.Post("/makepurchase");
+			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+			Assert.That(response.Body.AsString(), Is.EqualTo("ERROR:3001 PARAM not supplied"));
+		}
+	}
 }
