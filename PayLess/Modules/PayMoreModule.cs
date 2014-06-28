@@ -30,15 +30,21 @@ namespace PayLess.Modules
 
             Delete["/paymore/purchase/{purchaseId}"] = parameters =>
             {
-                var purchaseId = Guid.Empty;
-                var isValidPurchaseId = Guid.TryParse(parameters.purchaseId, out purchaseId);
-                if (!isValidPurchaseId)
-                    throw new PurchaseNotFound("PurchaseId is not a valid id");
+                var purchaseId = GetPurchaseIdFrom(parameters);
 
-                purchaseRepository.Delete(purchaseId.ToString());
+                purchaseRepository.Delete(purchaseId);
               
                 return HttpStatusCode.OK;
             };
+        }
+
+        private static string GetPurchaseIdFrom(dynamic parameters)
+        {
+            var purchaseId = Guid.Empty;
+            var isValidPurchaseId = Guid.TryParse(parameters.purchaseId, out purchaseId);
+            if (!isValidPurchaseId)
+                throw new PurchaseNotFound("PurchaseId is not a valid id");
+            return purchaseId.ToString();
         }
 
         private void Validate(Purchase purchase)
