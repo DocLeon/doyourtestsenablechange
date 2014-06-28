@@ -18,7 +18,7 @@ namespace PayLess.Modules
 			_purchase = purchase;
 			_purchaseStore = purchaseStore;
 			_purchaseFinder = purchaseFinder;
-			Post["/makepurchase"] = _  =>
+			Post["/payless/makepurchase"] = _  =>
 				                        {
 											var thePurchase = _purchase.From(Request.Url.Query);
 					                        thePurchase.Id = Guid.NewGuid().ToString();
@@ -26,7 +26,7 @@ namespace PayLess.Modules
 					                        return "Thankyou for using payless. Your purchaseId is " + thePurchase.Id;
 				                        };
 
-			Post["/refund"] = _ =>
+			Post["/payless/refund"] = _ =>
 				                  {
 					                  return _purchaseFinder.PurchaseExists(Request.Query.AccountNumber,
 					                                                        Request.Query.Location,
