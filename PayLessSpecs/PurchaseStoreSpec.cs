@@ -70,13 +70,11 @@ namespace PayLessSpecs
         }
 
         [Test]
-	    public void should_throw_PurchaseNotFound_when_purchase_isnt_in_db()
 	    {
-            var purchaseStore = new PurchaseStore();
             var purchaseThatIsNotInDb = Guid.NewGuid().ToString();
 
-	        Assert.Throws<PurchaseNotFound>(() => purchaseStore.GetById(purchaseThatIsNotInDb));
-
+			Assert.That(error.Code,Is.EqualTo(17638));
+			Assert.That(error.Parameter,Is.EqualTo("accountnumber"));
 	    }
 	}
 }
