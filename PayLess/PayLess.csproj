@@ -87,6 +87,7 @@
     <Compile Include="Errors\MissingParameterException.cs" />
     <Compile Include="Errors\MissingValueException.cs" />
     <Compile Include="Errors\PayLessValidation.cs" />
+    <Compile Include="Errors\PurchaseNotFound.cs" />
     <Compile Include="Repositories\IFindPurchases.cs" />
     <Compile Include="Repositories\IStorePurchases.cs" />
     <Compile Include="Models\Card.cs" />

@@ -80,6 +80,7 @@
     <Compile Include="PayLess\PurchaseWithPayLess.cs" />
     <Compile Include="PayLess\QueryStringParserSpec.cs" />
     <Compile Include="PayLess\ValidateCanBuildPurchaseFormParmatersSpec.cs" />
+    <Compile Include="PayMore\PurchaseStoreSpec.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -76,9 +76,4 @@ namespace PayLess.Modules
             purchase.Validate();
         }
     }
-
-    public class PurchaseNotFound : Exception
-    {
-        public PurchaseNotFound(string message) : base(message){}
-    }
 }
