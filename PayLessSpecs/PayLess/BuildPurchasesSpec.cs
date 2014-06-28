@@ -3,6 +3,7 @@ using ExpectedObjects;
 using Moq;
 using NUnit.Framework;
 using PayLess;
+using PayLess.Errors;
 using PayLess.Models;
 using PayLess.Validation;
 
@@ -52,6 +53,60 @@ namespace PayLessSpecs
 					Currency = _parsedQueryString["currency"]
 				}.ToExpectedObject()
 				.ShouldMatch(thePurchase);
+		}
+	}
+	[TestFixture]
+	public class build_micro_purchase_spec
+	{
+		private IDictionary<string, string> _parsedQueryString = new Dictionary<string, string>
+			                                         {
+				                                         {"accountnumber","441234567890"},				                                         
+				                                         {"currency","GBP"},
+														 {"type","micro"},
+														 {"location","LOCATION"},
+														 {"amount","AMOUNT"}
+			                                         };
+
+		private IParseQueryStrings _queryStringParser;
+
+		[TestCase("GB", "441234567890", "4.99", "GBP")]
+		[TestCase("AU", "123456789019", "6.08", "AUD")]
+		public void micro_payment_less_than_cut_off_builds_successfully(string location, string accountNumber, string amount, string currency)
+		{
+
+			_parsedQueryString["type"] = "micro";
+			_parsedQueryString["location"] = location;
+			_parsedQueryString["amount"] = amount;
+			_parsedQueryString["accountnumber"] = accountNumber;
+			_parsedQueryString["currency"] = currency;
+
+			_queryStringParser = Mock.Of<IParseQueryStrings>(parser => parser.Parse(It.IsAny<string>()) == _parsedQueryString);
+			var validator = Mock.Of<IValidatePurchaseCanBeBuilt>();
+			var purchase = new PurchaseBuilder(validator,
+												_queryStringParser);
+			var thePurchase = purchase.From("some input");
+			Assert.That(thePurchase, Is.Not.Null);
+		}
+
+		[TestCase("GB", "441234567890", "5.00", "GBP")]
+		[TestCase("AU", "123456789019", "6.09", "AUD")]
+		public void micro_payment_greater_or_equal_to_cutoff_throws_amount_too_high_error(string location, string accountNumber, string amount, string currency)
+		{
+			_parsedQueryString["type"] = "micro";
+			_parsedQueryString["location"] = location;
+			_parsedQueryString["amount"] = amount;
+			_parsedQueryString["accountnumber"] = accountNumber;
+			_parsedQueryString["currency"] = currency;
+
+			_queryStringParser = Mock.Of<IParseQueryStrings>(parser => parser.Parse(It.IsAny<string>()) == _parsedQueryString);
+
+			var validator = Mock.Of<IValidatePurchaseCanBeBuilt>();
+			var purchase = new PurchaseBuilder(validator,
+												_queryStringParser);
+			var error = Assert.Throws<AmountTooHighForMicroPayment>(() => purchase.From("some_input"));
+
+			Assert.That(error.Code, Is.EqualTo("1720000-38"));
+			Assert.That(error.Details, Is.EqualTo(string.Format("amount {0} is too high for micropayment in {1}", amount, location)));
 		}
 	}
 }

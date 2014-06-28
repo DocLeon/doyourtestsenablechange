@@ -13,7 +13,7 @@ namespace PayLessSpecs.PayMore
         [Test]
         public void MakePurchase()
         {
-            var client = new RestClient("http://localhost:51500");
+			var client = new RestClient("http://localhost:51525");
             client.FollowRedirects = false;            
             var request = new RestRequest("/paymore/purchase", Method.POST);
             request.RequestFormat = DataFormat.Json;
@@ -41,7 +41,7 @@ namespace PayLessSpecs.PayMore
         [Test]
         public void missingParamterReturnsBadRequestWithDetails()
         {
-            var client = new RestClient("http://localhost:51500");
+			var client = new RestClient("http://localhost:51525");
             client.FollowRedirects = false;
 
             var request = new RestRequest("/paymore/purchase", Method.POST);

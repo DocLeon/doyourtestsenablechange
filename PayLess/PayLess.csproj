@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ErrorHandling.cs" />
+    <Compile Include="Errors\AmountTooHighForMicroPayment.cs" />
     <Compile Include="Errors\InvalidCardDetails.cs" />
     <Compile Include="Errors\InvalidPurchaseMade.cs" />
     <Compile Include="Errors\MissingParameterException.cs" />
@@ -123,8 +124,8 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>51525</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:51500/</IISUrl>

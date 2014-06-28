@@ -77,8 +77,9 @@ namespace PayLessSpecs
 		[Test]
 		public void should_return_purhcase_id()
 		{
-			var response = _browser.Post("/makepurchase").Body.AsString();			
-			Assert.That(new Regex(@"\b[A-F0-9]{8}(?:-[A-F0-9]{4}){3}-[A-F0-9]{12}\b",RegexOptions.IgnoreCase).IsMatch(response),response);
+			Mock.Get(_purchaseBuilder).Setup(p => p.From(It.IsAny<string>())).Returns(new TestPurchase());
+			var response = _browser.Post("/makepurchase");
+			Assert.That(new Regex(@"\b[A-F0-9]{8}(?:-[A-F0-9]{4}){3}-[A-F0-9]{12}\b", RegexOptions.IgnoreCase).IsMatch(response.Body.AsString()), "STATUS {0} BODY: {1} ",response.StatusCode,response.Body.AsString());
 		}
 
 		[Test]
