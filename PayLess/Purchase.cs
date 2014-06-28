@@ -26,6 +26,10 @@
 			}				
 		}
 
+		protected Purchase()
+		{			
+		}
+
 		private string BecauseCurrencyIsNotAccepted()
 		{
 			return string.Format("currency {0} is not a valid currency", Currency);
@@ -71,5 +75,7 @@
 		public string Amount { get; set; }
 
 		public string Currency { get; set; }
+
+		public string Id { get; set; }
 	}
 }

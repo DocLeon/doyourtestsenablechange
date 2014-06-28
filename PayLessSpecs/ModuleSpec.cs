@@ -11,14 +11,18 @@ namespace PayLessSpecs
 	[TestFixture]
 	public class MakePurchase
 	{
-		public MakePurchase()
+		[SetUp]
+		public void SetUp()
 		{
 			_purchaseBuilder = Mock.Of<IBuildPurchases>();
+			_purchaseStore = Mock.Of<IStorePurchases>();
 			_browser = new Browser(with => with.Module<PayLessModule>()
-				.Dependency(_purchaseBuilder));
+				.Dependency(_purchaseBuilder)
+				.Dependency(_purchaseStore));
 		}
 		private Browser _browser;
 		private IBuildPurchases _purchaseBuilder;
+		private IStorePurchases _purchaseStore;
 
 		[Test]
 		public void should_build_purchase_from_parameters()
@@ -72,6 +76,25 @@ namespace PayLessSpecs
 		{
 			var response = _browser.Post("/makepurchase").Body.AsString();			
 			Assert.That(new Regex(@"\b[A-F0-9]{8}(?:-[A-F0-9]{4}){3}-[A-F0-9]{12}\b",RegexOptions.IgnoreCase).IsMatch(response),response);
+		}
+
+		[Test]
+		public void should_store_purchase()
+		{
+			Purchase purchase = new TestPurchase();
+			Mock.Get(_purchaseBuilder).Setup(p => p.From(It.IsAny<string>())).Returns(purchase);
+			_browser.Post("/makepurchase");
+			Mock.Get(_purchaseStore).Verify(p=>p.Add(purchase));
+		}
+	}
+
+	public class TestPurchase : Purchase
+	{
+		public TestPurchase():this(null,null,null,null)
+		{			
+		}
+		public TestPurchase(string accountNumber, string location, string amount, string currency)
+		{
 		}
 	}
 }

@@ -87,6 +87,7 @@
     <Compile Include="IObscureCardNumber.cs" />
     <Compile Include="IParseQueryStrings.cs" />
     <Compile Include="IStoreCards.cs" />
+    <Compile Include="IStorePurchases.cs" />
     <Compile Include="IValidatePurchaseCanBeBuilt.cs" />
     <Compile Include="MissingParameterException.cs" />
     <Compile Include="MissingValueException.cs" />

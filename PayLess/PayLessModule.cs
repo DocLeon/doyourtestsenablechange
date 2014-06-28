@@ -8,15 +8,17 @@ namespace PayLess
 	public class PayLessModule : NancyModule
 	{
 		private IBuildPurchases _purchase;
+		private readonly IStorePurchases _purchaseStore;
 
-		public PayLessModule(IBuildPurchases purchase)
+		public PayLessModule(IBuildPurchases purchase, IStorePurchases purchaseStore)
 		{
 			_purchase = purchase;
+			_purchaseStore = purchaseStore;
 			Post["/makepurchase"] = _  =>
 				                        {
-											_purchase.From(Request.Url.Query);
-											return Guid.NewGuid().ToString();
-										
+											var thePurchase = _purchase.From(Request.Url.Query);
+											_purchaseStore.Add(thePurchase);
+											return Guid.NewGuid().ToString();										
 										};
 
 
@@ -41,26 +43,6 @@ namespace PayLess
 				                 };
 		}
 	}
-
-	public class PurchaseStore
-	{		
-		public string Save(Purchase purchase)
-		{
-			string purchaseToken = Guid.NewGuid().ToString();
-			using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["PayLess"].ConnectionString))
-			{
-				/*using (var command = new SqlCommand(string.Format("INSERT INTO Purchase (cardtoken,purchasetoken,amount) VALUES ('{0}','{1}','{2}'",purchase.CardToken,purchaseToken,purchase.Amount), connection))
-				{
-					connection.Open();
-					command.ExecuteNonQuery();
-				}*/
-			}				
-			return purchaseToken;			
-		}
-		
-	}
-
-
 	public interface IRegisterCards
 	{
 		RegisteredCard Register(CardDetails cardDetails);
