@@ -1,7 +1,7 @@
 ﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Do Your Tests enable change?">
@@ -15,263 +15,348 @@
 
     <!-- Custom styles for this template -->
     <link href="/static/css/main.css" rel="stylesheet">
-    
+
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
-    
+
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/smoothscroll.js"></script>
-    
 
-  </head>
 
-  <body data-spy="scroll" data-offset="0" data-target="#navigation">
+</head>
+
+<body data-spy="scroll" data-offset="0" data-target="#navigation">
 
     <!-- Fixed navbar -->
-	    <div id="navigation" class="navbar navbar-default navbar-fixed-top">
-	      <div class="container">
-	        <div class="navbar-header">
-	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	          </button>
-	          <a class="navbar-brand" href="/"><b>Do Your Tests Enable Change</b></a>
-	        </div>
-	        <div class="navbar-collapse collapse">
-	          <ul class="nav navbar-nav">
-	            <li class="active"><a href="#home" class="smothscroll">Introduction</a></li>
-	            <li><a href="#the-busines-problem" class="smothscroll">The Business Problem</a></li>
-	            <li><a href="#step2" class="smothScroll">Retrospective</a></li>
-	            <li><a href="#step3" class="smothScroll">A New Feature</a></li>
-	            <li><a href="#step4" class="smothScroll">A New Feature</a></li>
-	          </ul>
-	        </div><!--/.nav-collapse -->
-	      </div>
-	    </div>
+    <div id="navigation" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><b>Do Your Tests Enable Change</b></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#home" class="smothscroll">Introduction</a></li>
+                    <li><a href="#the-busines-problem" class="smothscroll">The Business Problem</a></li>
+                    <li><a href="#part1-payless" class="smothScroll">Part 1</a></li>
+                    <li><a href="#part2-payless-refund" class="smothScroll">Part 2</a></li>
+                    <li><a href="#part3-paymore" class="smothScroll">Part 3</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
 
 
-	<section id="home" name="home"></section>
-	<div id="headerwrap">
-	    <div class="container">
-	    	<div class="row centered">
-	    		<div class="col-lg-12">
-					<h1>Do Your <b>Tests Enable Change</b>?</h1>
-					<h3>No really do they</h3>
-					<br>
-	    		</div>
-	    		
-	    		<div class="col-lg-2">
-	    			<h5>Amazing Results</h5>
-	    			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-	    			<img class="hidden-xs hidden-sm hidden-md" src="/static/img/arrow1.png">
-	    		</div>
-	    		<div class="col-lg-8">
-	    			<img class="img-responsive" src="/static/img/shut-up-and-take-my-money.png" alt="">
-	    		</div>
-	    		<div class="col-lg-2">
-	    			<br>
-	    			<img class="hidden-xs hidden-sm hidden-md" src="/static/img/arrow2.png">
-	    			<h5>Awesome Design</h5>
-	    			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-	    		</div>
-	    	</div>
-	    </div> <!--/ .container -->
-	</div><!--/ #headerwrap -->
+    <section id="home" name="home"></section>
+    <div id="headerwrap">
+        <div class="container">
+            <div class="row centered">
+                <div class="col-lg-12">
+                    <h1>Do Your <b>Tests Enable Change</b>?</h1>
+                </div>
+
+                <div class="col-lg-2">
+                    <h5>No, really do they?</h5>
+                    <p>There's been a bit of backlash against TDD recently. Is this really that good?</p>
+                    <img class="hidden-xs hidden-sm hidden-md" src="/static/img/arrow1.png">
+                </div>
+                <div class="col-lg-8">
+                    <img class="img-responsive" src="/static/img/red-green-refactor.png" alt="">
+                </div>
+                <div class="col-lg-2">
+                    <br>
+                    <img class="hidden-xs hidden-sm hidden-md" src="/static/img/arrow2.png">
+                    <h5>How do your tests help?</h5>
+                    <p>What is it about your tests that help you?</p>
+                </div>
+            </div>
+        </div> <!--/ .container -->
+    </div><!--/ #headerwrap -->
 
 
-      <section id="the-busines-problem" name="the-busines-problem"></section>
-	<!-- INTRO WRAP -->
-	<div id="intro">
-		<div class="container">
-			<div class="row centered">
-				<h1>Designed To Excel</h1>
-				<br>
-				<br>
-				<div class="col-lg-4">
-					<img src="/static/img/intro01.png" alt="">
-					<h3>Community</h3>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-				</div>
-				<div class="col-lg-4">
-					<img src="/static/img/intro02.png" alt="">
-					<h3>Schedule</h3>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-				</div>
-				<div class="col-lg-4">
-					<img src="/static/img/intro03.png" alt="">
-					<h3>Monitoring</h3>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-				</div>
-			</div>
-			<br>
-			<hr>
-	    </div> <!--/ .container -->
-	</div><!--/ #introwrap -->
-	
-	<!-- FEATURES WRAP -->
-	<div id="features">
-		<div class="container">
-			<div class="row">
-				<h1 class="centered">What's New?</h1>
-				<br>
-				<br>
-				<div class="col-lg-6 centered">
-					<img class="centered" src="/static/img/mobile.png" alt="">
-				</div>
-				
-				<div class="col-lg-6">
-					<h3>Some Features</h3>
-					<br>
-				<!-- ACCORDION -->
-		            <div class="accordion ac" id="accordion2">
-		                <div class="accordion-group">
-		                    <div class="accordion-heading">
-		                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-		                        First Class Design
-		                        </a>
-		                    </div><!-- /accordion-heading -->
-		                    <div id="collapseOne" class="accordion-body collapse in">
-		                        <div class="accordion-inner">
-								<p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-								</div><!-- /accordion-inner -->
-		                    </div><!-- /collapse -->
-		                </div><!-- /accordion-group -->
-		                <br>
-		
-		                <div class="accordion-group">
-		                    <div class="accordion-heading">
-		                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-		                        Retina Ready Theme
-		                        </a>
-		                    </div>
-		                    <div id="collapseTwo" class="accordion-body collapse">
-		                        <div class="accordion-inner">
-								<p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-								</div><!-- /accordion-inner -->
-		                    </div><!-- /collapse -->
-		                </div><!-- /accordion-group -->
-		                <br>
-		
-		                 <div class="accordion-group">
-		                    <div class="accordion-heading">
-		                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-		                        Awesome Support
-		                        </a>
-		                    </div>
-		                    <div id="collapseThree" class="accordion-body collapse">
-		                        <div class="accordion-inner">
-								<p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-								</div><!-- /accordion-inner -->
-		                    </div><!-- /collapse -->
-		                </div><!-- /accordion-group -->
-		                <br>
-		                
-		                 <div class="accordion-group">
-		                    <div class="accordion-heading">
-		                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
-		                        Responsive Design
-		                        </a>
-		                    </div>
-		                    <div id="collapseFour" class="accordion-body collapse">
-		                        <div class="accordion-inner">
-								<p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-								</div><!-- /accordion-inner -->
-		                    </div><!-- /collapse -->
-		                </div><!-- /accordion-group -->
-		                <br>			
-					</div><!-- Accordion -->
-				</div>
-			</div>
-		</div><!--/ .container -->
-	</div><!--/ #features -->
-	
-	
-	<section id="showcase" name="showcase"></section>
-	<div id="showcase">
-		<div class="container">
-			<div class="row">
-				<h1 class="centered">Some Screenshots</h1>
-				<br>
-				<div class="col-lg-8 col-lg-offset-2">
-					<div id="carousel-example-generic" class="carousel slide">
-					  <!-- Indicators -->
-					  <ol class="carousel-indicators">
-					    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-					    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-					  </ol>
-					
-					  <!-- Wrapper for slides -->
-					  <div class="carousel-inner">
-					    <div class="item active">
-					      <img src="/static/img/item-01.png" alt="">
-					    </div>
-					    <div class="item">
-					      <img src="/static/img/item-02.png" alt="">
-					    </div>
-					  </div>
-					</div>
-				</div>
-			</div>
-			<br>
-			<br>
-			<br>	
-		</div><!-- /container -->
-	</div>	
+    <section id="the-busines-problem" name="the-busines-problem"></section>
+    <!-- INTRO WRAP -->
+    <div id="intro">
+        <div class="container">
+            <div class="row centered">
+                <h1>StickyLabel Inc</h1>
+                <br>
+                <br>
+                <div class="col-lg-4">
+                    <img src="/static/img/intro01.png" alt="">
+                    <h3>They Sell Sticky Labels</h3>
+                    <p>And they want to sell them on the internet.</p>
+                </div>
+                <div class="col-lg-4">
+                    <img src="/static/img/intro02.png" alt="">
+                    <h3>PayLess</h3>
+                    <p>They've selected a Payment provider called <strong>PayLess</strong> that they'd like you to integrate with.</p>
+                </div>
+                <div class="col-lg-4">
+                    <img src="/static/img/intro03.png" alt="">
+                    <h3>What makes your tests easy to change</h3>
+                    <p>You'll be rotating to other peoples code, what makes it easy to change their code? Would you consider it legacy?</p>
+                </div>
+            </div>
+            <br>
+            <hr>
+        </div> <!--/ .container -->
+    </div><!--/ #introwrap -->
+    <!-- FEATURES WRAP -->
+    <div id="features">
+        <div class="container">
+            <div class="row">
+                <h1 class="centered">StickyLabels Inc want to sell their product</h1>
+                <br>
+                <br>
+                <div class="col-lg-6 centered">
+                    <img class="centered" src="/static/img/mobile.png" alt="">
+                </div>
+
+                <div class="col-lg-6">
+                    <h3>Some Features</h3>
+                    <br>
+                    <!-- ACCORDION -->
+                    <div class="accordion ac" id="accordion2">
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                                    Must have some form of interface.
+                                </a>
+                            </div><!-- /accordion-heading -->
+                            <div id="collapseOne" class="accordion-body collapse in">
+                                <div class="accordion-inner">
+                                    <p>Write a system that allows users to input their account number, where they are located, how much they want to pay and what currency they want to pay in. The system should validate this input so a successful call to PAYLESS can be made (because even invalid calls to PAYLESS costs us MONEY). This is can be a console app, webpage or mobile app.</p>
+                                </div><!-- /accordion-inner -->
+                            </div><!-- /collapse -->
+                        </div><!-- /accordion-group -->
+                        <br>
+
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                                    They only have <strong>1 Product</strong>
+                                </a>
+                            </div>
+                            <div id="collapseTwo" class="accordion-body collapse">
+                                <div class="accordion-inner">
+                                    <p>So none of that product code stuff, you just need to integrate with their chosen Payment provider and sell sticky labels.</p>
+                                </div><!-- /accordion-inner -->
+                            </div><!-- /collapse -->
+                        </div><!-- /accordion-group -->
+                        <br>
+
+                    </div><!-- Accordion -->
+                </div>
+            </div>
+        </div><!--/ .container -->
+    </div><!--/ #features -->
 
 
-	<section id="contact" name="contact"></section>
-	<div id="footerwrap">
-		<div class="container">
-			<div class="col-lg-5">
-				<h3>Address</h3>
-				<p>
-				Av. Greenville 987,<br/>
-				New York,<br/>
-				90873<br/>
-				United States
-				</p>
-			</div>
-			
-			<div class="col-lg-7">
-				<h3>Drop Us A Line</h3>
-				<br>
-				<form role="form" action="#" method="post" enctype="plain"> 
-				  <div class="form-group">
-				    <label for="name1">Your Name</label>
-				    <input type="name" name="Name" class="form-control" id="name1" placeholder="Your Name">
-				  </div>
-				  <div class="form-group">
-				    <label for="email1">Email address</label>
-				    <input type="email" name="Mail" class="form-control" id="email1" placeholder="Enter email">
-				  </div>
-				  <div class="form-group">
-				  	<label>Your Text</label>
-				  	<textarea class="form-control" name="Message" rows="3"></textarea>
-				  </div>
-				  <br>
-				  <button type="submit" class="btn btn-large btn-success">SUBMIT</button>
-				</form>
-			</div>
-		</div>
-	</div>
-	<div id="c">
-		<div class="container">
-			<p>Created by <a href="http://www.blacktie.co">BLACKTIE.CO</a></p>
-		
-		</div>
-	</div>
+    <section id="part1-payless" name="part1-payless"></section>
+    <div id="showcase">
+        <div class="container">
+            <div class="row">
+                <h1 class="centered">Pay<b>Less</b></h1>
+                <br>
+                <div class="col-lg-12 story-text">
+                    <p>Payless will take payments from account holders in the UK and Australia.</p>
+
+                    <code>
+                        POST http://www.doyourtestsenablechange.com/payless/makepurchase?accountnumber=44234567890&location=UK&amount=1.99&currency=GBP&type=micro
+                    </code>
+
+                    <h3>Parameter details and rules.</h3>
+                    <p>
+                        location: must be UK (UK) AU (australia) currency: GBP (£) AUD($) type: micro (or left out completely)
+                    </p>
+                    <p>
+                        Account numbers are validated according to the rules above. Payments below the described amount should be marked as 'micro' in the type field.
+                    </p>
+                    <p>
+                        The request will return a plain text response containing the id of the purchase.
+                    </p>
+                    <p>
+                        All Payless account numbers have ten digits. UK account numbers are prepended with 44. AU account numbers are appended with 19.
+                    </p><p>
+
+                        A payment must be marked as micro if it is below a certain monetry value. In the UK this is amounts less than £5. In AU this is amounts less than $6.09
+                    </p><p>
+
+                        To make a payment clients must <br />
+                        <code>POST to this URL: http://www.doyourtestsenablechange.com/payless/makepurchase</code>
+                        And include the correct parameters on a query string.
+                    </p>
+
+
+
+                    <br>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+    </div><!-- /container -->
+
+
+
+    <section id="part2-payless-refund" name="part2-payless-refund"></section>
+    <div id="footerwrap">
+        <div class="container">
+            <div class="col-lg-5">
+                <h3>Refunds</h3>
+            </div>
+
+            <div class="col-lg-7">
+                <h3>They want their money back</h3>
+                <br>
+                <p>We've discovered customers aren't always delighted with their purchases, so have been asking for refunds. Luckily PAYLESS supplies refund functionality. The teams must implement this. (What? They haven't been storing purchaseIds? We'll send those customers a cuddly aardvark as a gesture of goodwill).</p>
+            </div>
+        </div>
+    </div>
+
+    <section id="part2-payless-refund-code" name="part2-payless-refund-code"></section>
+    <div id="showcase">
+        <div class="container">
+            <div class="row">
+                <h1 class="centered">Pay<b>Less</b> REFUNDS</h1>
+                <br>
+                <div class="col-lg-12 story-text">
+
+                    <p>
+                        <code>
+                            POST http://www.doyourtestsenablechange.com/payless/refundpurchase?accountnumber=44234567890&location=UK&purchaseId={GUID}
+                        </code>
+                    </p><p>
+                        Parameter details location, accountnumber as above purchaseId supplied must be match those stored by PAYLESS for the supplied PurchaseId
+                    </p>
+                    <p>
+                        Response will be a success/failure.
+                    </p>
+                    <p>
+
+                        ONLY FULL REFUNDS ARE PERMITTED. requests containing amounts will be REJECTED.
+                    </p>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+    </div><!-- /container -->
+    <section id="part3-paymore" name="part3-paymore"></section>
+    <div id="footerwrap">
+        <div class="container">
+            <div class="col-lg-5">
+                <h3>Pay<strong>MORE</strong></h3>
+            </div>
+
+            <div class="col-lg-7">
+                <h3>We can get a lower transaction fee on higher priced stickynotes</h3>
+                <br>
+                <p>Ok now we need all transactions at £5 in GB or $6.09 AU to use the new PayMore Api</p>
+            </div>
+        </div>
+    </div>
+
+    <section id="part3-paymore-code" name="part3-paymore-code"></section>
+    <div id="showcase">
+        <div class="container">
+            <div class="row">
+                <h1 class="centered">Pay<b>More</b></h1>
+                <br>
+                <div class="col-lg-12 story-text">
+                    <p>PayMore is slightly more RESTful than PayLess</p>
+                    <p>
+                        <code>
+                            POST http://www.doyourtestsenablechange.com/paymore/purchase
+                            <br />
+                            Content-Type application/x-www-form-urlencoded
+                        </code>
+                        <br />
+                        or
+                        <br />
+                        <code>
+                            POST http://www.doyourtestsenablechange.com/paymore/purchase
+                            <br />
+                            Content-Type application/json
+                        </code>
+                        <h3>JSON BODY</h3>
+                        <pre>                            
+                            {
+                            "accountNumber": "441111111111",
+                            "amount": "5.00",
+                            "currency": "GBP",
+                            "location": "GB"
+                            }
+                            </pre>
+
+                    </p>
+                    <p>
+                        As above in terms of parameters supplied (and their validation) BUT type must be ommitted amounts must be over (or equal to) £5.00 or $6.09 other payments must be made through PAYLESS AND parameters in form POST body.
+                    </p>
+                    <p>
+                        Response is 302 with the purchase resource in a LOCATION HEADER
+                        <code>
+                            Location: http://www.doyourtestsenablechange.com/paymore/purchase/3ae017df-3120-48b0-ac68-6f30cbb3584a
+                        </code>
+                    </p>
+                    <br>
+                </div>
+            </div>
+
+        </div>
+        <br>
+        <br>
+        <br>
+    </div><!-- /container -->
+    
+    
+    <section id="part3-paymore-refund" name="part3-paymore-refund"></section>
+    <div id="footerwrap">
+        <div class="container">
+            <div class="col-lg-3">
+                <h3>Pay<strong>MORE</strong> Refunds</h3>
+            </div>
+
+            <div class="col-lg-9">
+                <h3>People still need to be able to refund PayMore</h3>
+                <br>
+                <p>You can refund in PayMore by sending a <strong>DELETE</strong> request to the purchase resource</p>
+                <p>
+                    <code>
+                        DELETE  http://www.doyourtestsenablechange.com/paymore/purchase/3ae017df-3120-48b0-ac68-6f30cbb3584a
+                        <br />
+                    </code>
+                    <br>
+</div>
+        </div>
+    </div>
+
+
+
+
+    <div id="c">
+        <div class="container">
+            <p>Created by <a href="http://www.blacktie.co">BLACKTIE.CO</a></p>
+        </div>
+    </div>
 
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="/static/js/bootstrap.js"></script>
-	<script>
-	$('.carousel').carousel({
-	  interval: 3500
-	})
-	</script>
-  </body>
+    <script>
+        $('.carousel').carousel({
+            interval: 3500
+        })
+    </script>
+</body>
 </html>
-        

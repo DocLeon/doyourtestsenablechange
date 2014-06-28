@@ -16,7 +16,7 @@ namespace PayLess.Modules
             {
                 var purchase = this.Bind<Purchase>(new BindingConfig
                 {
-                    BodyOnly = false,
+                    BodyOnly = true,
                     IgnoreErrors = false
                 });
 
