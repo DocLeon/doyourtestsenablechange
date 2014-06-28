@@ -4,26 +4,37 @@ using Nancy.ModelBinding;
 using Nancy.Responses;
 using PayLess.Errors;
 using PayLess.Models;
+using PayLess.Repositories;
 
 namespace PayLess.Modules
 {
     public class PayMoreModule : NancyModule
     {
-        public PayMoreModule(IBuildPurchases purchaseBuilder)
+        public PayMoreModule(IStorePurchases purchaseRepository)
         {
             Post["/paymore/purchase"] = paramters =>
             {
                 var purchase = this.Bind<Purchase>(new BindingConfig
                 {
-                    BodyOnly = true,
+                    BodyOnly = false,
                     IgnoreErrors = false
                 });
 
                 Validate(purchase);                
+                                
+                return new RedirectResponse(string.Format("/paymore/purchase/{0}", Guid.NewGuid()));                
+            };
+
+            Delete["/paymore/purchase/{purchaseId}"] = parameters =>
+            {
+                var purchaseId = Guid.Empty;
+                var isValidPurchaseId = Guid.TryParse(parameters.purchaseId, out purchaseId);
+                if (!isValidPurchaseId)
+                    throw new PurchaseNotFound();
+
                 
-                
-                return new RedirectResponse(string.Format("/paymore/purchase/{0}", Guid.NewGuid()),
-                    RedirectResponse.RedirectType.SeeOther);                
+
+                return HttpStatusCode.OK;
             };
         }
 
@@ -55,5 +66,9 @@ namespace PayLess.Modules
 
             purchase.Validate();
         }
+    }
+
+    public class PurchaseNotFound : Exception
+    {
     }
 }

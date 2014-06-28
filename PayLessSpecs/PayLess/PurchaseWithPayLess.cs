@@ -11,7 +11,7 @@ namespace PayLessSpecs
 		[Test]
 		public void MakePurchase()
 		{
-			var client = new RestClient("http://localhost:51525");
+			var client = new RestClient("http://localhost:51500");
 			var request = new RestRequest("/makepurchase?accountnumber=441234567890&location=GB&amount=1.99&currency=GBP", Method.POST);
 
 			var response = client.Execute(request);

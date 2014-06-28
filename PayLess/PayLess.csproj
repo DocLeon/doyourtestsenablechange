@@ -84,7 +84,7 @@
     <Compile Include="Errors\MissingParameterException.cs" />
     <Compile Include="Errors\MissingValueException.cs" />
     <Compile Include="Errors\PayLessValidation.cs" />
-    <Compile Include="IStorePurchases.cs" />
+    <Compile Include="Repositories\IStorePurchases.cs" />
     <Compile Include="Models\Card.cs" />
     <Compile Include="Models\CardDetails.cs" />
     <Compile Include="Models\IBuildPurchases.cs" />
@@ -104,7 +104,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="Modules\PayLessModule.cs.orig" />
     <None Include="Properties\PublishProfiles\DoYourTestsEnableChange.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -124,7 +123,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>51525</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using Nancy;
 using PayLess.Models;
+using PayLess.Repositories;
 
 namespace PayLess.Modules
 {

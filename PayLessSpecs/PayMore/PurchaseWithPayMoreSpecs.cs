@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using Nancy;
 using NUnit.Framework;
 using PayLess.Models;
 using RestSharp;
+using HttpStatusCode = System.Net.HttpStatusCode;
 
 namespace PayLessSpecs.PayMore
 {
@@ -13,7 +13,7 @@ namespace PayLessSpecs.PayMore
         [Test]
         public void MakePurchase()
         {
-			var client = new RestClient("http://localhost:51525");
+			var client = new RestClient("http://localhost:51500");
             client.FollowRedirects = false;            
             var request = new RestRequest("/paymore/purchase", Method.POST);
             request.RequestFormat = DataFormat.Json;
@@ -41,7 +41,7 @@ namespace PayLessSpecs.PayMore
         [Test]
         public void missingParamterReturnsBadRequestWithDetails()
         {
-			var client = new RestClient("http://localhost:51525");
+			var client = new RestClient("http://localhost:51500");
             client.FollowRedirects = false;
 
             var request = new RestRequest("/paymore/purchase", Method.POST);
@@ -57,6 +57,24 @@ namespace PayLessSpecs.PayMore
         [Test]
         public void IncompatibleParametersReturnsForbiddenWithDetails()
         {
+            var client = new RestClient("http://localhost:51500");
+            client.FollowRedirects = false;
+
+            var request = new RestRequest("/paymore/purchase", Method.POST);
+            request.AddBody(new Purchase
+            {
+                AccountNumber = "442345",
+                Amount = "5.00",
+                Currency = "GBP",
+                Location = "GB"
+            });
+
+            var response = client.Execute(request);
+
+            Console.WriteLine("STATUS:{0}", response.StatusCode);
+            Console.WriteLine("BODY:{0}", response.Content);
+
+            Assert.That((HttpStatusCode)response.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
         }
     }
 }

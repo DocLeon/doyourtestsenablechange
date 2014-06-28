@@ -8,6 +8,7 @@ using PayLess;
 using PayLess.Errors;
 using PayLess.Models;
 using PayLess.Modules;
+using PayLess.Repositories;
 
 namespace PayLessSpecs
 {
