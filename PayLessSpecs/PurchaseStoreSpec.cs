@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using PayLess;
+using PayLess.Errors;
 using PayLess.Repositories;
 
 namespace PayLessSpecs
@@ -45,6 +46,15 @@ namespace PayLessSpecs
 			Assert.IsFalse(purchaseStore.PurchaseExists(testPurchase.AccountNumber,
 				testPurchase.Location,
 				"NO PURCHASE MADE"));
+		}
+
+		[Test]
+		public void should_report_error_if_values_missing()
+		{
+			var error = Assert.Throws<missingParameterException>(
+				()=>new PurchaseStore().PurchaseExists(null,"location","purchaseid"));
+			Assert.That(error.Code,Is.EqualTo(17638));
+			Assert.That(error.Parameter,Is.EqualTo("accountnumber"));
 		}
 	}
 }

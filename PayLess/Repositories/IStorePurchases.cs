@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using PayLess.Errors;
 using PayLess.Models;
 
 namespace PayLess.Repositories
@@ -27,7 +28,7 @@ namespace PayLess.Repositories
 
 		public bool PurchaseExists(string accountnumber, string location, string purchaseid)
 		{
-			
+			ValidateParametersExist(accountnumber, location, purchaseid);
 			using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["PayLess"].ConnectionString))
 			{
 				using (var command = new SqlCommand(string.Format(
@@ -41,6 +42,28 @@ namespace PayLess.Repositories
 				}
 			}
 			return false;
+		}
+
+		private static void ValidateParametersExist(string accountnumber, string location, string purchaseid)
+		{
+			if (accountnumber == null)
+				throw new missingParameterException
+					      {
+						      Code = 17638,
+						      Parameter = "accountnumber"
+					      };
+			if (location == null)
+				throw new missingParameterException
+					      {
+						      Code = 17638,
+						      Parameter = "location"
+					      };
+			if (purchaseid == null)
+				throw new missingParameterException
+					      {
+						      Code = 17638,
+						      Parameter = "purchaseid"
+					      };
 		}
 	}
 	
