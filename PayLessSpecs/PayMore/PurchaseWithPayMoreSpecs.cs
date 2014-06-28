@@ -11,7 +11,7 @@ namespace PayLessSpecs.PayMore
     public class PurchaseWithPayMoreSpcs
     {
         [Test]
-        public void MakePurchase()
+        public void MakePurchase_Succeeds()
         {
 			var client = new RestClient("http://localhost:51500");
             client.FollowRedirects = false;            
@@ -37,6 +37,8 @@ namespace PayLessSpecs.PayMore
             Assert.That(locationHeader.Value, Is.StringStarting("/paymore/purchase/"));
 
         }
+
+
 
         [Test]
         public void missingParamterReturnsBadRequestWithDetails()

@@ -20,9 +20,12 @@ namespace PayLess.Modules
                     IgnoreErrors = false
                 });
 
-                Validate(purchase);                
+                purchase.Id = Guid.NewGuid().ToString();
+
+                Validate(purchase);
+                purchaseRepository.Add(purchase);
                                 
-                return new RedirectResponse(string.Format("/paymore/purchase/{0}", Guid.NewGuid()));                
+                return new RedirectResponse(string.Format("/paymore/purchase/{0}", purchase.Id));                
             };
 
             Delete["/paymore/purchase/{purchaseId}"] = parameters =>
@@ -30,10 +33,10 @@ namespace PayLess.Modules
                 var purchaseId = Guid.Empty;
                 var isValidPurchaseId = Guid.TryParse(parameters.purchaseId, out purchaseId);
                 if (!isValidPurchaseId)
-                    throw new PurchaseNotFound();
+                    throw new PurchaseNotFound("PurchaseId is not a valid id");
 
-                
-
+                purchaseRepository.Delete(purchaseId.ToString());
+              
                 return HttpStatusCode.OK;
             };
         }
@@ -70,5 +73,6 @@ namespace PayLess.Modules
 
     public class PurchaseNotFound : Exception
     {
+        public PurchaseNotFound(string message) : base(message){}
     }
 }

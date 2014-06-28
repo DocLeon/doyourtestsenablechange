@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Nancy;
 using NUnit.Framework;
 using PayLess.Models;
@@ -36,6 +37,34 @@ namespace PayLessSpecs.PayMore
             var response = client.Execute(request);
 
             Assert.That((HttpStatusCode)response.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));                        
+        }
+
+        [Test]
+        public void Can_delete_existing_purchase()
+        {
+            var client = new RestClient("http://localhost:51500");
+            client.FollowRedirects = false;
+            var request = new RestRequest("/paymore/purchase", Method.POST);
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(new Purchase
+            {
+                AccountNumber = "442345678901",
+                Amount = "5.00",
+                Currency = "GBP",
+                Location = "GB"
+            });
+            var response = client.Execute(request);
+
+            var deletePurchaseResource = response.Headers.SingleOrDefault(h => h.Name == "Location");
+            var deleteRequest = new RestRequest(deletePurchaseResource.Value.ToString(), Method.DELETE);
+            var deleteResponse = client.Execute(deleteRequest);
+
+            Console.WriteLine("STATUS:{0}", response.StatusCode);
+            Console.WriteLine("BODY:{0}", response.Content);
+
+            Assert.That(deleteResponse.StatusCode, Is.EqualTo(System.Net.HttpStatusCode.OK));
+
+
         }
     }
 }
