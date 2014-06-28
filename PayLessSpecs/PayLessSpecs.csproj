@@ -67,16 +67,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuildPurchasesSpec.cs" />
-    <Compile Include="CardSpec.cs" />
-    <Compile Include="CardStoreSpec.cs" />
-    <Compile Include="ModuleSpec.cs" />
-    <Compile Include="CardNumberObscurerSpec.cs" />
+    <Compile Include="PayLess\BuildPurchasesSpec.cs" />
+    <Compile Include="PayLess\CardSpec.cs" />
+    <Compile Include="PayLess\CardStoreSpec.cs" />
+    <Compile Include="PayLess\ModuleSpec.cs" />
+    <Compile Include="PayLess\CardNumberObscurerSpec.cs" />
+    <Compile Include="PayMore\PurchaseWithPayMoreSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PurchaseSpecs.cs" />
-    <Compile Include="PurchaseWithPayLess.cs" />
-    <Compile Include="QueryStringParserSpec.cs" />
-    <Compile Include="ValidateCanBuildPurchaseFormParmatersSpec.cs" />
+    <Compile Include="PayLess\PurchaseSpecs.cs" />
+    <Compile Include="PayLess\PurchaseWithPayLess.cs" />
+    <Compile Include="PayLess\QueryStringParserSpec.cs" />
+    <Compile Include="PayLess\ValidateCanBuildPurchaseFormParmatersSpec.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

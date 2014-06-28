@@ -10,25 +10,35 @@ namespace PayLess.Models
 			Location = location;
 			Amount = amount;
 			Currency = currency;
-			float number;
-			if (!float.TryParse(Amount,out number)) PurchaseIsInvalid(BecauseAmountIsInvalid());
-			if (AccountNumber.Length != 12) PurchaseIsInvalid(BecauseAccountNumberIsWrongLength());
-			if (Currency != "AUD" && Currency != "GBP") PurchaseIsInvalid(BecauseCurrencyIsNotAccepted());
-			if (Location != "GB" && Location != "AU") PurchaseIsInvalid(BecauseLocationIsInvalid());
-			if (Location == "GB")
-			{
-				if (!AccountNumber.StartsWith("44")) PurchaseIsInvalid(BecauseAccountNumberIsWrong());
-				if (Currency != "GBP") PurchaseIsInvalid(BecauseCurrencyIsInvalid());
-			}
-				
-			if (Location == "AU")
-			{
-				if (!AccountNumber.EndsWith("19")) PurchaseIsInvalid(BecauseAccountNumberIsWrong());
-				if (Currency != "AUD") PurchaseIsInvalid(BecauseCurrencyIsInvalid());
-			}				
+
+			Validate();
 		}
 
-		private string BecauseCurrencyIsNotAccepted()
+	    public Purchase()
+	    {
+
+	    }
+
+	    public void Validate()
+	    {
+	        float number;
+	        if (!float.TryParse(Amount, out number)) PurchaseIsInvalid(BecauseAmountIsInvalid());
+	        if (AccountNumber.Length != 12) PurchaseIsInvalid(BecauseAccountNumberIsWrongLength());
+	        if (Currency != "AUD" && Currency != "GBP") PurchaseIsInvalid(BecauseCurrencyIsNotAccepted());
+	        if (Location != "GB" && Location != "AU") PurchaseIsInvalid(BecauseLocationIsInvalid());
+	        if (Location == "GB")
+	        {
+	            if (!AccountNumber.StartsWith("44")) PurchaseIsInvalid(BecauseAccountNumberIsWrong());
+	            if (Currency != "GBP") PurchaseIsInvalid(BecauseCurrencyIsInvalid());
+	        }
+
+	        if (Location == "AU")
+	        {
+	            if (!AccountNumber.EndsWith("19")) PurchaseIsInvalid(BecauseAccountNumberIsWrong());
+	            if (Currency != "AUD") PurchaseIsInvalid(BecauseCurrencyIsInvalid());
+	        }
+	    }
+	    private string BecauseCurrencyIsNotAccepted()
 		{
 			return string.Format("currency {0} is not a valid currency", Currency);
 		}

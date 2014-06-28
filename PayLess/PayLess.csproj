@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="Models\Card.cs" />
     <Compile Include="Models\CardDetails.cs" />
+    <Compile Include="Modules\PayMoreModule.cs" />
     <Compile Include="Repositories\CardStore.cs" />
     <Compile Include="ErrorHandling.cs" />
     <Compile Include="Models\IBuildPurchases.cs" />
