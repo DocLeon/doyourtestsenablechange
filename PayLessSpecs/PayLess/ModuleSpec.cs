@@ -32,7 +32,7 @@ namespace PayLessSpecs
 		[Test]
 		public void should_build_purchase_from_parameters()
 		{			
-			_browser.Post("/makepurchase",
+			_browser.Post("/payless/makepurchase",
 			              with => with.Query("PURCHASE_PARAMETER", "VALUE")); 
 			Mock.Get(_purchaseBuilder).Verify(b=>b.From("?PURCHASE_PARAMETER=VALUE"));
 		}
@@ -45,7 +45,7 @@ namespace PayLessSpecs
 					                                                                         Parameter = "PARAM",
 																							 Code = 3001
 				                                                                         });
-			var response = _browser.Post("/makepurchase");
+			var response = _browser.Post("/payless/makepurchase");
 			Assert.That(response.StatusCode,Is.EqualTo(HttpStatusCode.BadRequest));
 			Assert.That(response.Body.AsString(),Is.EqualTo("ERROR:3001 PARAM missing"));
 		}
@@ -58,7 +58,7 @@ namespace PayLessSpecs
 				Parameter = "PARAM",
 				Code = 3001
 			});
-			var response = _browser.Post("/makepurchase");
+			var response = _browser.Post("/payless/makepurchase");
 			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
 			Assert.That(response.Body.AsString(), Is.EqualTo("ERROR:3001 PARAM not supplied"));
 		}
@@ -71,7 +71,7 @@ namespace PayLessSpecs
 																							 ErrorCode = 928,
 																							 Reason = "Reason"
 				                                                                         });
-			var response = _browser.Post("/makepurchase");
+			var response = _browser.Post("/payless/makepurchase");
 			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
 			Assert.That(response.Body.AsString(), Is.EqualTo("ERROR:928 Reason"));
 		}
@@ -80,7 +80,7 @@ namespace PayLessSpecs
 		public void should_return_purhcase_id()
 		{
 			Mock.Get(_purchaseBuilder).Setup(p => p.From(It.IsAny<string>())).Returns(new TestPurchase());
-			var response = _browser.Post("/makepurchase");
+			var response = _browser.Post("/payless/makepurchase");
 			Assert.That(new Regex(@"\b[A-F0-9]{8}(?:-[A-F0-9]{4}){3}-[A-F0-9]{12}\b", RegexOptions.IgnoreCase).IsMatch(response.Body.AsString()), "STATUS {0} BODY: {1} ",response.StatusCode,response.Body.AsString());
 		}
 
@@ -89,7 +89,7 @@ namespace PayLessSpecs
 		{
 			Purchase purchase = new TestPurchase();
 			Mock.Get(_purchaseBuilder).Setup(p => p.From(It.IsAny<string>())).Returns(purchase);
-			_browser.Post("/makepurchase");
+			_browser.Post("/payless/makepurchase");
 			Mock.Get(_purchaseStore).Verify(p=>p.Add(purchase));
 		}
 	}	
@@ -115,7 +115,7 @@ namespace PayLessSpecs
 			                                      .Dependency(purchaseFinder)
 												  .Dependency(Mock.Of<IBuildPurchases>())
 												  .Dependency(Mock.Of<IStorePurchases>()));
-			browser.Post("/refund", with =>
+			browser.Post("/payless/refund", with =>
 				                        {
 					                        with.Query("location", "LOCATION");
 											with.Query("accountnumber","ACCOUNTNUMBER");
