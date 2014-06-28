@@ -1,4 +1,6 @@
-﻿using Moq;
+﻿using System;
+using System.Text.RegularExpressions;
+using Moq;
 using NUnit.Framework;
 using Nancy;
 using Nancy.Testing;
@@ -63,6 +65,13 @@ namespace PayLessSpecs
 			var response = _browser.Post("/makepurchase");
 			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
 			Assert.That(response.Body.AsString(), Is.EqualTo("ERROR:928 Reason"));
+		}
+
+		[Test]
+		public void should_return_purhcase_id()
+		{
+			var response = _browser.Post("/makepurchase").Body.AsString();			
+			Assert.That(new Regex(@"\b[A-F0-9]{8}(?:-[A-F0-9]{4}){3}-[A-F0-9]{12}\b",RegexOptions.IgnoreCase).IsMatch(response),response);
 		}
 	}
 }

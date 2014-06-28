@@ -15,7 +15,7 @@ namespace PayLess
 			Post["/makepurchase"] = _  =>
 				                        {
 											_purchase.From(Request.Url.Query);
-											return HttpStatusCode.OK;
+											return Guid.NewGuid().ToString();
 										
 										};
 
