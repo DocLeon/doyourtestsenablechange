@@ -79,8 +79,10 @@ namespace PayLessSpecs.PayMore
             Assert.That((HttpStatusCode)response.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
         }
 
-        [TestCase("4.99")]
-        public void Should_throw_error_if_amount_is_less_that_5_00_for_uk(string amount)
+        [TestCase("442345678901", "4.99", "GB", "GBP")]
+        [TestCase("442345678901", "0.99", "GB", "GBP")]
+        [TestCase("234567890119", "6.00", "AU", "AUD")]
+        public void Should_throw_error_if_amount_is_less_that_5_00_for_uk_or_6_09_for_AU(string accountNumber, string amount, string location, string currency)
         {
             var client = new RestClient("http://localhost:51500");
             client.FollowRedirects = false;
@@ -88,17 +90,42 @@ namespace PayLessSpecs.PayMore
             request.RequestFormat = DataFormat.Json;
             request.AddBody(new Purchase
             {
-                AccountNumber = "442345678901",
+                AccountNumber = accountNumber,
                 Amount = amount,
-                Currency = "GBP",
-                Location = "GB"
+                Currency = currency,
+                Location = location
             });
 
             var response = client.Execute(request);
 
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
-            Assert.That(response.Content,Is.StringContaining("Minimum amount of 5.00"));
+            Assert.That(response.Content, Is.StringContaining(string.Format("amount {0} is too low for PayMore in {1}",amount, location)));
             
+        }
+
+        [TestCase("442345678901", "5.00", "GB", "GBP")]
+        [TestCase("442345678901", "5.01", "GB", "GBP")]
+        [TestCase("234567890119", "6.09", "AU", "AUD")]
+        [TestCase("234567890119", "6.10", "AU", "AUD")]
+        public void Should_be_successful_when_amounts_are_over_5_00_for_uk_or_6_09_for_AU(string accountNumber, string amount, string location, string currency)
+        {
+            var client = new RestClient("http://localhost:51500");
+            client.FollowRedirects = false;
+            var request = new RestRequest("/paymore/purchase", Method.POST);
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(new Purchase
+            {
+                AccountNumber = accountNumber,
+                Amount = amount,
+                Currency = currency,
+                Location = location
+            });
+
+            var response = client.Execute(request);
+
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.SeeOther));
+            Assert.That(response.Content, Is.Not.StringContaining(string.Format("amount {0} is too low for PayMore in {1}", amount, location)));
+
         }
     }
 }

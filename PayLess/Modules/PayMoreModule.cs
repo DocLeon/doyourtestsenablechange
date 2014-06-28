@@ -73,6 +73,8 @@ namespace PayLess.Modules
                     Parameter = "currency"
                 };
 
+            PurchaseBuilder.CheckAmount(purchase.Location, purchase.Amount, null);
+
             purchase.Validate();
         }
     }

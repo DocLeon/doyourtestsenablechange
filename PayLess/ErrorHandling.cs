@@ -2,6 +2,7 @@
 using Nancy;
 using Nancy.Bootstrapper;
 using PayLess.Errors;
+using PayLess.Models;
 using PayLess.Modules;
 
 namespace PayLess
@@ -12,6 +13,14 @@ namespace PayLess
         {
             pipelines.OnError += (context, exception) =>
             {
+                if (exception is AmountTooLowForPaymore)
+                {
+                    return BuildResponse(string.Format("ERROR:{0} {1}",
+                                             (exception as AmountTooLowForPaymore).Code,
+                                             (exception as AmountTooLowForPaymore).Details),
+                                             HttpStatusCode.Forbidden);
+                }
+
                 if (exception is PurchaseNotFound)
                 {
                     return BuildResponse(exception.Message, HttpStatusCode.NotFound);
