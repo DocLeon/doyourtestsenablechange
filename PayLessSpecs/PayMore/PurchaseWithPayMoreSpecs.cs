@@ -78,5 +78,27 @@ namespace PayLessSpecs.PayMore
 
             Assert.That((HttpStatusCode)response.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
         }
+
+        [TestCase("4.99")]
+        public void Should_throw_error_if_amount_is_less_that_5_00_for_uk(string amount)
+        {
+            var client = new RestClient("http://localhost:51500");
+            client.FollowRedirects = false;
+            var request = new RestRequest("/paymore/purchase", Method.POST);
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(new Purchase
+            {
+                AccountNumber = "442345678901",
+                Amount = amount,
+                Currency = "GBP",
+                Location = "GB"
+            });
+
+            var response = client.Execute(request);
+
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
+            Assert.That(response.Content,Is.StringContaining("Minimum amount of 5.00"));
+            
+        }
     }
 }
