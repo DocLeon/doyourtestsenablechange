@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using PayLess;
+using PayLess.Models;
+using PayLess.Repositories;
 
 namespace PayLessSpecs
 {

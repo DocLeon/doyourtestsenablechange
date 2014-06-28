@@ -2,6 +2,7 @@
 using ExpectedObjects;
 using NUnit.Framework;
 using PayLess;
+using PayLess.Models;
 
 namespace PayLessSpecs
 {

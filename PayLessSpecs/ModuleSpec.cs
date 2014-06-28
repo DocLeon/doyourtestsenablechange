@@ -3,6 +3,9 @@ using NUnit.Framework;
 using Nancy;
 using Nancy.Testing;
 using PayLess;
+using PayLess.Errors;
+using PayLess.Models;
+using PayLess.Modules;
 
 namespace PayLessSpecs
 {

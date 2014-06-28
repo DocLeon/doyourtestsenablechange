@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using Nancy;
 using Nancy.Bootstrapper;
+using PayLess.Errors;
 
 namespace PayLess
 {

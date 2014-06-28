@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
 using PayLess;
+using PayLess.Errors;
+using PayLess.Models;
 
 namespace PayLessSpecs
 {

@@ -3,6 +3,8 @@ using ExpectedObjects;
 using Moq;
 using NUnit.Framework;
 using PayLess;
+using PayLess.Models;
+using PayLess.Validation;
 
 namespace PayLessSpecs
 {
