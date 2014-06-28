@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PayLess.Modules
+namespace PayLess.Errors
 {
     public class PurchaseNotFound : Exception
     {
