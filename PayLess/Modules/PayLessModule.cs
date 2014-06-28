@@ -11,18 +11,27 @@ namespace PayLess.Modules
 	{
 		private IBuildPurchases _purchase;
 		private readonly IStorePurchases _purchaseStore;
+		private readonly IFindPurchases _purchaseFinder;
 
-		public PayLessModule(IBuildPurchases purchase, IStorePurchases purchaseStore)
+		public PayLessModule(IBuildPurchases purchase, IStorePurchases purchaseStore, IFindPurchases purchaseFinder)
 		{
 			_purchase = purchase;
 			_purchaseStore = purchaseStore;
+			_purchaseFinder = purchaseFinder;
 			Post["/makepurchase"] = _  =>
 				                        {
 											var thePurchase = _purchase.From(Request.Url.Query);
 					                        thePurchase.Id = Guid.NewGuid().ToString();
 											_purchaseStore.Add(thePurchase);
-					                        return "Thankyou for usig payless. Your purchaseId is " + thePurchase.Id;
+					                        return "Thankyou for using payless. Your purchaseId is " + thePurchase.Id;
 				                        };
+
+			Post["/refund"] = _ =>
+				                  {
+					                  return _purchaseFinder.PurchaseExists(Request.Query.AccountNumber,
+					                                                        Request.Query.Location,
+					                                                        Request.Query.PurchaseId) ? "Refund: SUCCESS" : "Refund: FAILURE";
+				                  };
 
 
 			Get["/status"] = _ =>

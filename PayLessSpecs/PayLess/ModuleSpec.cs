@@ -22,7 +22,8 @@ namespace PayLessSpecs
 			_purchaseStore = Mock.Of<IStorePurchases>();
 			_browser = new Browser(with => with.Module<PayLessModule>()
 				.Dependency(_purchaseBuilder)
-				.Dependency(_purchaseStore));
+				.Dependency(_purchaseStore)
+				.Dependency(Mock.Of<IFindPurchases>()));
 		}
 		private Browser _browser;
 		private IBuildPurchases _purchaseBuilder;
@@ -91,7 +92,7 @@ namespace PayLessSpecs
 			_browser.Post("/makepurchase");
 			Mock.Get(_purchaseStore).Verify(p=>p.Add(purchase));
 		}
-	}
+	}	
 
 	public class TestPurchase : Purchase
 	{
@@ -100,6 +101,28 @@ namespace PayLessSpecs
 		}
 		public TestPurchase(string accountNumber, string location, string amount, string currency)
 		{
+		}
+	}
+
+	[TestFixture]
+	public class RefundSpec
+	{
+		[Test]
+		public void should_look_for_purchase_based_on_location_and_account_number_and_purchase_id()
+		{
+			var purchaseFinder = Mock.Of<IFindPurchases>();
+			var browser = new Browser(with => with.Module<PayLessModule>()
+			                                      .Dependency(purchaseFinder)
+												  .Dependency(Mock.Of<IBuildPurchases>())
+												  .Dependency(Mock.Of<IStorePurchases>()));
+			browser.Post("/refund", with =>
+				                        {
+					                        with.Query("location", "LOCATION");
+											with.Query("accountnumber","ACCOUNTNUMBER");
+											with.Query("purchaseid","PURCHASEID");
+				                        }
+										   );
+			Mock.Get(purchaseFinder).Verify(f=>f.PurchaseExists("ACCOUNTNUMBER","LOCATION","PURCHASEID"));
 		}
 	}
 }
