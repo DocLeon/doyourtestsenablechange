@@ -27,7 +27,7 @@ namespace PayLess.Repositories
 			}
 			catch (Exception)
 			{
-				//just in case database goes down				
+				throw;
 			}
 			
 		}	
