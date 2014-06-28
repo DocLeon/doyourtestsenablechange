@@ -17,9 +17,10 @@ namespace PayLess
 			Post["/makepurchase"] = _  =>
 				                        {
 											var thePurchase = _purchase.From(Request.Url.Query);
+					                        thePurchase.Id = Guid.NewGuid().ToString();
 											_purchaseStore.Add(thePurchase);
-											return Guid.NewGuid().ToString();										
-										};
+					                        return "Thankyou for usig payless. Your purchaseId is " + thePurchase.Id;
+				                        };
 
 
 			Get["/status"] = _ =>
