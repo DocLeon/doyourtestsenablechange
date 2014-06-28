@@ -72,7 +72,6 @@
     <Compile Include="PayLess\CardStoreSpec.cs" />
     <Compile Include="PayLess\ModuleSpec.cs" />
     <Compile Include="PayLess\CardNumberObscurerSpec.cs" />
-    <Compile Include="PayMore\PurchaseStoreSpec.cs" />
     <Compile Include="PayMore\PurchaseWithPayMoreSpecs.cs" />
     <Compile Include="PayMore\RefundWithPayMoreSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
