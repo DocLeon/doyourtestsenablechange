@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
+using PayLess.Errors;
 using PayLess.Models;
 using PayLess.Modules;
 

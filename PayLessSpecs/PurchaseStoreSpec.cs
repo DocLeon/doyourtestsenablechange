@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using PayLess;
+using PayLess.Errors;
 using PayLess.Models;
 using PayLess.Modules;
 using PayLess.Repositories;
@@ -48,6 +49,8 @@ namespace PayLessSpecs
 				testPurchase.Location,
 				"NO PURCHASE MADE"));
 		}
+
+        [Test]
 	    public void should_get_purchase_by_id()
         {
             var purchaseStore = new PurchaseStore();
@@ -70,11 +73,13 @@ namespace PayLessSpecs
         }
 
         [Test]
-	    {
-            var purchaseThatIsNotInDb = Guid.NewGuid().ToString();
+        public void should_report_error_if_values_missing()
+        {
+            var error = Assert.Throws<missingParameterException>(
+            () => new PurchaseStore().PurchaseExists(null, "location", "purchaseid"));
+            Assert.That(error.Code, Is.EqualTo(17638));
+            Assert.That(error.Parameter, Is.EqualTo("accountnumber"));
+        }
 
-			Assert.That(error.Code,Is.EqualTo(17638));
-			Assert.That(error.Parameter,Is.EqualTo("accountnumber"));
-	    }
 	}
 }
