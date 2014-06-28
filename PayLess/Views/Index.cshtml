@@ -97,9 +97,9 @@
                     <p>They've selected a Payment provider called <strong>PayLess</strong> that they'd like you to integrate with.</p>
                 </div>
                 <div class="col-lg-4">
-                    <img src="/static/img/intro03.png" alt="">
-                    <h3>What makes your tests easy to change</h3>
-                    <p>You'll be rotating to other peoples code, what makes it easy to change their code? Would you consider it legacy?</p>
+                    <img src="/static/img/intro03.png" alt="">                    
+                    <h3>Calling the API Costs MONEY</h3>
+                    <p>Each call to the API <strong>including invalid ones</strong> Costs £0.20 or $0.36 </p>
                 </div>
             </div>
             <br>
@@ -155,15 +155,38 @@
             </div>
         </div><!--/ .container -->
     </div><!--/ #features -->
+    <section id="useful-tools" name="useful-tools"></section>
+    <div id="footerwrap">
+        <div class="container">
+            <div class="col-lg-3">
+                <h3>Some Handy Libraries</h3>
+            </div>
 
+            <div class="col-lg-9">
+                <h3>Java</h3>
+                <br>
+                <a href="http://hc.apache.org/httpcomponents-client-ga/quickstart.html">Apache Http Components client</a>
+                <br>
+                <h3>C#</h3>
+                <br>
+                <a href="http://restsharp.org/">RestSharp</a>
+                <br>
+                <h3>Ruby</h3>
+                <br>                
+                <a href="http://ruby-doc.org/stdlib-2.1.2/libdoc/net/http/rdoc/Net/HTTP.html">May as well use ruby core:</a>
+                <br>
+            </div>
+        </div>
+    </div>
 
     <section id="part1-payless" name="part1-payless"></section>
     <div id="showcase">
         <div class="container">
             <div class="row">
-                <h1 class="centered">Pay<b>Less</b></h1>
+                <h1 class="centered">Pay<b>Less</b></h1>                
                 <br>
                 <div class="col-lg-12 story-text">
+                    
                     <p>Payless will take payments from account holders in the UK and Australia.</p>
 
                     <code>
@@ -184,14 +207,14 @@
                         All Payless account numbers have ten digits. UK account numbers are prepended with 44. AU account numbers are appended with 19.
                     </p><p>
 
-                        A payment must be marked as micro if it is below a certain monetry value. In the UK this is amounts less than £5. In AU this is amounts less than $6.09
-                    </p><p>
+                            A payment must be marked as micro if it is below a certain monetry value. In the UK this is amounts less than £5. In AU this is amounts less than $6.09
+                        </p><p>
 
-                        To make a payment clients must <br />
-                        <code>POST to this URL: http://www.doyourtestsenablechange.com/payless/makepurchase</code>
-                        And include the correct parameters on a query string.
-                    </p>
-
+                                To make a payment clients must <br />
+                                <code>POST to this URL: http://www.doyourtestsenablechange.com/payless/makepurchase</code>
+                                And include the correct parameters on a query string.
+                            </p>
+                    <h3>Remember Calling the API Costs MONEY</h3>
 
 
                     <br>
@@ -242,6 +265,7 @@
 
                         ONLY FULL REFUNDS ARE PERMITTED. requests containing amounts will be REJECTED.
                     </p>
+                    <h3>Remember Calling the API Costs MONEY</h3>
                     <br>
                 </div>
             </div>
@@ -261,6 +285,7 @@
                 <h3>We can get a lower transaction fee on higher priced stickynotes</h3>
                 <br>
                 <p>Ok now we need all transactions at £5 in GB or $6.09 AU to use the new PayMore Api</p>
+
             </div>
         </div>
     </div>
@@ -308,6 +333,7 @@
                         </code>
                     </p>
                     <br>
+                    <h3>Remember Calling the API Costs MONEY</h3>
                 </div>
             </div>
 
