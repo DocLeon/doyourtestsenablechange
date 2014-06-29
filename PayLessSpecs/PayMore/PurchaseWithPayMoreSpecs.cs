@@ -57,6 +57,23 @@ namespace PayLessSpecs.PayMore
         }
 
         [Test]
+        public void Should_fail_when_using_querystring_parameters()
+        {
+            //localhost:51500
+            var client = new RestClient("http://localhost:51500");
+            client.FollowRedirects = false;
+
+            var request = new RestRequest("/paymore/purchase?accountnumber=441234567890&location=GB&amount=5.99&currency=GBP", Method.POST);
+
+            var response = client.Execute(request);
+
+            Console.WriteLine("STATUS:{0}", response.StatusCode);
+            Console.WriteLine("BODY:{0}", response.Content);
+
+            Assert.That((HttpStatusCode)response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+        }
+
+        [Test]
         public void IncompatibleParametersReturnsForbiddenWithDetails()
         {
             var client = new RestClient("http://localhost:51500");
