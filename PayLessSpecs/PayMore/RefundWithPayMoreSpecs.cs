@@ -10,10 +10,13 @@ namespace PayLessSpecs.PayMore
     [TestFixture]
     public class RefundWithPayMoreSpecs
     {
+        //private string payMoreBaseUrl = "http://www.doyourtestsenablechange.com";
+        private string payMoreBaseUrl = "http://localhost:51500";
+
         [Test]
         public void Should_return_not_allowed_for_purchase_root()
         {
-            var client = new RestClient("http://localhost:51500");
+            var client = new RestClient(payMoreBaseUrl);
             client.FollowRedirects = false;
             var request = new RestRequest("/paymore/purchase", Method.DELETE);
             
@@ -28,7 +31,7 @@ namespace PayLessSpecs.PayMore
             var purchaseId = "-bad-id";
 
 
-            var client = new RestClient("http://localhost:51500");
+            var client = new RestClient(payMoreBaseUrl);
             client.FollowRedirects = false;
 
 
@@ -42,7 +45,7 @@ namespace PayLessSpecs.PayMore
         [Test]
         public void Can_delete_existing_purchase()
         {
-            var client = new RestClient("http://localhost:51500");
+            var client = new RestClient(payMoreBaseUrl);
             client.FollowRedirects = false;
             var request = new RestRequest("/paymore/purchase", Method.POST);
             request.RequestFormat = DataFormat.Json;

@@ -10,10 +10,13 @@ namespace PayLessSpecs.PayMore
     [TestFixture]
     public class PurchaseWithPayMoreSpcs
     {
+        private string _payMoreBaseUrl = "http://localhost:51500";
+        //private string _payMoreBaseUrl = "http://www.doyourtestsenablechange.com";
+
         [Test]
         public void MakePurchase_Succeeds()
         {
-			var client = new RestClient("http://localhost:51500");
+			var client = new RestClient(_payMoreBaseUrl);
             client.FollowRedirects = false;            
             var request = new RestRequest("/paymore/purchase", Method.POST);
             request.RequestFormat = DataFormat.Json;
@@ -43,7 +46,7 @@ namespace PayLessSpecs.PayMore
         [Test]
         public void missingParamterReturnsBadRequestWithDetails()
         {
-			var client = new RestClient("http://localhost:51500");
+			var client = new RestClient(_payMoreBaseUrl);
             client.FollowRedirects = false;
 
             var request = new RestRequest("/paymore/purchase", Method.POST);
@@ -60,7 +63,7 @@ namespace PayLessSpecs.PayMore
         public void Should_fail_when_using_querystring_parameters()
         {
             //localhost:51500
-            var client = new RestClient("http://localhost:51500");
+            var client = new RestClient(_payMoreBaseUrl);
             client.FollowRedirects = false;
 
             var request = new RestRequest("/paymore/purchase?accountnumber=441234567890&location=GB&amount=5.99&currency=GBP", Method.POST);
@@ -76,7 +79,7 @@ namespace PayLessSpecs.PayMore
         [Test]
         public void IncompatibleParametersReturnsForbiddenWithDetails()
         {
-            var client = new RestClient("http://localhost:51500");
+            var client = new RestClient(_payMoreBaseUrl);
             client.FollowRedirects = false;
 
             var request = new RestRequest("/paymore/purchase", Method.POST);
@@ -101,7 +104,7 @@ namespace PayLessSpecs.PayMore
         [TestCase("234567890119", "6.00", "AU", "AUD")]
         public void Should_throw_error_if_amount_is_less_that_5_00_for_uk_or_6_09_for_AU(string accountNumber, string amount, string location, string currency)
         {
-            var client = new RestClient("http://localhost:51500");
+            var client = new RestClient(_payMoreBaseUrl);
             client.FollowRedirects = false;
             var request = new RestRequest("/paymore/purchase", Method.POST);
             request.RequestFormat = DataFormat.Json;
@@ -126,7 +129,7 @@ namespace PayLessSpecs.PayMore
         [TestCase("234567890119", "6.10", "AU", "AUD")]
         public void Should_be_successful_when_amounts_are_over_5_00_for_uk_or_6_09_for_AU(string accountNumber, string amount, string location, string currency)
         {
-            var client = new RestClient("http://localhost:51500");
+            var client = new RestClient(_payMoreBaseUrl);
             client.FollowRedirects = false;
             var request = new RestRequest("/paymore/purchase", Method.POST);
             request.RequestFormat = DataFormat.Json;
