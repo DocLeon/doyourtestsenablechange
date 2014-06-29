@@ -2,6 +2,7 @@
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Responses;
+using Nancy.Responses.Negotiation;
 using PayLess.Errors;
 using PayLess.Models;
 using PayLess.Repositories;
@@ -37,10 +38,23 @@ namespace PayLess.Modules
             Delete["/paymore/purchase/{purchaseId}"] = parameters =>
             {
                 var purchaseId = GetPurchaseIdFrom(parameters);
-
+       
                 purchaseRepository.Delete(purchaseId);
               
                 return HttpStatusCode.OK;
+            };
+
+            Get["/paymore/purchase/{purchaseId}"] = parameters =>
+            {
+                var purchaseId = GetPurchaseIdFrom(parameters);
+                Purchase purchase = purchaseRepository.GetById(purchaseId);                                    
+                return Negotiate
+                    .WithMediaRangeResponse(MediaRange.FromString("text/html"), new XmlResponse<Purchase>(purchase,"text/xml",new DefaultXmlSerializer()))
+                    .WithMediaRangeResponse(MediaRange.FromString("text/xml"), new XmlResponse<Purchase>(purchase,"text/xml",new DefaultXmlSerializer()))
+                    .WithMediaRangeResponse(MediaRange.FromString("application/json"), new JsonResponse(purchase,new DefaultJsonSerializer()))
+                    .WithStatusCode(HttpStatusCode.OK)
+                    .WithContentType("application/json")
+                    .WithModel(purchase);
             };
         }
 

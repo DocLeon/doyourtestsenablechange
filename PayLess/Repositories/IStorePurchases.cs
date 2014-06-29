@@ -26,6 +26,8 @@ namespace PayLess.Repositories
 
         public void Delete(string purchaseId)
         {
+            GetById(purchaseId);
+
             using (
                 var sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["PayLess"].ConnectionString)
                 )
